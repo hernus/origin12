@@ -22,7 +22,7 @@ end
 gem 'jquery-rails'
 gem 'haml', '~> 3.1'
 gem 'haml-rails'
-gem "watu_table_builder", :require => "table_builder", :git => "git://github.com/watu/table_builder.git"
+gem "watu_table_builder", :require => "table_builder"
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
