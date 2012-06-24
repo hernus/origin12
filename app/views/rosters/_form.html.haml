@@ -1,0 +1,10 @@
+= form_for @roster do |f|
+  -if @roster.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@roster.errors.count, "error")} prohibited this roster from being saved:"
+      %ul
+        - @roster.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

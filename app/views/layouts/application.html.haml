@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title Origin12
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .header
+      .container_12
+        .grid_3
+          = image_tag 'origin-45px.png', :alt => 'Origin12'
+        %ul.main-menu.grid_5.push_4
+          %li= link_to 'Roster', roster_path('dummy')
+          %li
+            %span Timesheet
+          %li
+            %span Scorecard
+          %li
+            %span Account
+    .container_12
+      = yield
+    .footer
