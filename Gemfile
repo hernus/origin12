@@ -7,6 +7,11 @@ gem 'rails', '3.2.6'
 
 gem 'mysql2'
 
+gem 'jquery-rails'
+gem 'haml', '~> 3.1'
+gem 'haml-rails'
+gem "watu_table_builder", :require => "table_builder"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -19,15 +24,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-gem 'haml', '~> 3.1'
-gem 'haml-rails'
-gem "watu_table_builder", :require => "table_builder"
-
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'autotest'
   gem 'autotest-rails'
+end
+
+group :staging, :production do
+  gem 'therubyracer'
 end
 
 # To use ActiveModel has_secure_password
