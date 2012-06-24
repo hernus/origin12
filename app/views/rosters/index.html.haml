@@ -1,12 +1,19 @@
-.roster
-  %h1 Roster
+.rosters
+  .grid_2
+    =# link_to '< Prior 4 Weeks', month: (current_date.beginning_of_month - 1).strftime('%Y-%m')
+    &nbsp;
+  .grid_8
+    %h1#month #{h current_date.strftime("%B %Y")} Roster
+  .grid_2
+    =# link_to 'Next 4 Weeks >', month: (current_date.end_of_month + 1).strftime('%Y-%m')
+    &nbsp;
   .calendar
-    = calendar_for(rosters) do |calendar|
-      = calendar.head('Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat')
+    = calendar_for rosters, year: current_date.year, month: current_date.month do |calendar|
+      = calendar.head 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'
       = calendar.day do |date, rosters|
-        = date.day
+        %span.date_day= date.day
         - rosters.each do |roster|
-          =# h roster.roster_date
+          .roster{ :class => "billing_probability_#{roster.billing_probability}" }= h roster.project.title
 
   - if false
     (:id => 'roster_date_%d')

@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ActiveRecord::Base.transaction do
-    
+
   # Projects
   Project.delete_all
   wool = Project.create!(title: 'WOOL')
@@ -20,12 +20,14 @@ ActiveRecord::Base.transaction do
   start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
   end_date   = Date.today.end_of_month.end_of_week(:sunday)
   (start_date..end_date).each do |roster_date|
-    Roster.create!(roster_date: roster_date, project: wool)
+    unless roster_date.saturday? || roster_date.sunday?
+      Roster.create!(roster_date: roster_date, project: wool, billing_probability: 100)
+    end
   end
 
-  Roster.create!(roster_date: (start_date + 5.days),  project: sick)
-  Roster.create!(roster_date: (start_date + 10.days), project: bhp)
-  Roster.create!(roster_date: (start_date + 10.days), project: dws)
-  Roster.create!(roster_date: (start_date + 11.days), project: bhp)
+  Roster.create!(roster_date: (start_date + 5.days),  project: sick, billing_probability: 0)
+  Roster.create!(roster_date: (start_date + 10.days), project: bhp, billing_probability: 90)
+  Roster.create!(roster_date: (start_date + 10.days), project: dws, billing_probability: 50)
+  Roster.create!(roster_date: (start_date + 11.days), project: bhp, billing_probability: 90)
 
 end

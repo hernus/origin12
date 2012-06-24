@@ -1,0 +1,19 @@
+.billing_probability_100 {
+	color: white;
+	background-color: green;
+}
+
+.billing_probability_90 {
+	color: white;
+	background-color: blue;
+}
+
+.billing_probability_50 {
+	color: black;
+	background-color: yellow;
+}
+
+.billing_probability_0 {
+	color: black;
+	background-color: red;
+}

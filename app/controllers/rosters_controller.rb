@@ -1,8 +1,8 @@
 class RostersController < ApplicationController
 
   helper_method \
-      :rosters,
-      :roster
+      :current_date,
+      :rosters
 
   def index
     respond_to do |format|
@@ -67,12 +67,13 @@ class RostersController < ApplicationController
 
   private
 
-  def rosters
-    @rosters ||= Roster.all
+  def current_date
+    # @current_date ||= params[:month] ? Date.parse(params[:month]) : Date.today
+    @current_date ||= Date.today
   end
 
-  def roster
-    # TODO: Roster.find(params[:id])
+  def rosters
+    @rosters ||= Roster.all
   end
 
 end

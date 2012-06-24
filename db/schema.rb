@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120624071638) do
+ActiveRecord::Schema.define(:version => 20120624101008) do
 
   create_table "projects", :force => true do |t|
     t.string   "key"
@@ -23,16 +23,30 @@ ActiveRecord::Schema.define(:version => 20120624071638) do
     t.datetime "deleted_at"
   end
 
+  create_table "reasons", :force => true do |t|
+    t.string   "key"
+    t.integer  "company_id"
+    t.string   "description"
+    t.string   "color"
+    t.string   "background_color"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.datetime "deleted_at"
+  end
+
   create_table "rosters", :force => true do |t|
     t.string   "key"
     t.integer  "customer_id"
     t.integer  "project_id"
     t.date     "roster_date"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "billing_probability"
+    t.integer  "reason_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.datetime "deleted_at"
   end
 
+  add_index "rosters", ["project_id"], :name => "index_rosters_on_project_id"
   add_index "rosters", ["roster_date"], :name => "index_rosters_on_roster_date"
 
 end
