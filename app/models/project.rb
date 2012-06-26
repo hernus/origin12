@@ -2,7 +2,8 @@ class Project < ActiveRecord::Base
 
   attr_accessible :description, :title
 
-  has_many :rosters
+  belongs_to :customer
+  has_many   :rosters
 
   after_create :initialize_key
 

@@ -8,11 +8,17 @@
 
 ActiveRecord::Base.transaction do
 
+  # Customers
+  Customer.delete_all
+  wool = Customer.create!(name: 'WOOL')
+  bhp  = Customer.create!(name: 'BHP')
+  dws  = Customer.create!(name: 'DWS')
+
   # Projects
   Project.delete_all
-  wool = Project.create!(title: 'WOOL')
-  bhp  = Project.create!(title: 'BHP')
-  dws  = Project.create!(title: 'DWS')
+  wool = wool.projects.create!(title: 'WOOL')
+  bhp  = bhp.projects.create!(title: 'BHP')
+  dws  = dws.projects.create!(title: 'DWS')
   sick = Project.create!(title: 'SICK')
 
   # Rosters

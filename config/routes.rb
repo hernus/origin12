@@ -1,8 +1,10 @@
 Origin12::Application.routes.draw do
 
+  resources :customers
+
   resources :projects
 
-  resources :rosters
+  resources :rosters, :only => [ :index, :new, :create, :edit, :update ]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

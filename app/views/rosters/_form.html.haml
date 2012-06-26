@@ -1,10 +1,58 @@
-= form_for @roster do |f|
-  -if @roster.errors.any?
+= form_for roster do |f|
+  -if roster.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@roster.errors.count, "error")} prohibited this roster from being saved:"
+      %h2= "#{pluralize(roster.errors.count, "error")} prohibited this roster from being saved:"
       %ul
-        - @roster.errors.full_messages.each do |msg|
+        - roster.errors.full_messages.each do |msg|
           %li= msg
-
+  .clearfix
+    .customer_project.grid_3.alpha
+      %span.customer
+        = label 'roster_customer_id', 'Customer'
+        = collection_select :roster, :customer_id, Customer.all, :id, :display_name, prompt: true
+      %span.project
+        = label 'roster_project_id', 'Project'
+        = collection_select :roster, :project_id, [], :id, :display_name, :prompt => true
+    .budget_invoiced.grid_3.omega
+      %span.budget
+        %label Budget
+        %span.value $50,000.00
+      %span.invoiced
+        %label Invoiced
+        %span.value $40,000.00
+  %hr
+  .clearfix
+    .days_of_week.grid_3.alpha
+      %label Days
+      = wday_check_box_tags
+    .duration.grid_3.omega
+      %span.shift
+        %label Shift
+        %span.value
+          = f.text_field :shift
+      %span.hours
+        %label Hours/Day
+        %span.value
+          = f.text_field :hours
+      %span.weeks
+        %label Weeks
+        %span.value
+          = text_field_tag :weeks
+      %span.rate_card
+        = button_tag 'Rate Card'
+  %hr
+  .clearfix
+    .protected.grid_3.alpha
+      = check_box_tag 'Protected'
+      %label Protected
+    .calculations.grid_3.omega
+      %span.total
+        %label Total
+        %span.value $3,000.00
+      %span.remaining
+        %label Remaining
+        %span.value $7,000.00
   .actions
+    = button_tag 'Cancel'
+    =# link_to 'Back', rosters_path
     = f.submit 'Save'

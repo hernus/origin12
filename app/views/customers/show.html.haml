@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Key:
+  = @customer.key
+%p
+  %b Name:
+  = @customer.name
+%p
+  %b Company:
+  = @customer.company_id
+
+= link_to 'Edit', edit_customer_path(@customer)
+\|
+= link_to 'Back', customers_path

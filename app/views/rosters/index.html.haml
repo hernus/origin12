@@ -10,15 +10,12 @@
   .calendar
     = calendar_for rosters, year: current_date.year, month: current_date.month do |calendar|
       = calendar.head 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'
-      = calendar.day do |date, rosters|
+      = calendar.day(:id => 'date_%Y%m%d') do |date, rosters|
         %span.date_day= date.day
         - rosters.each do |roster|
-          .roster{ :class => "billing_probability_#{roster.billing_probability}" }= h roster.project.title
+          = link_to roster.project.title, edit_roster_path(roster), { class: "roster billing_probability_#{roster.billing_probability}" }
+          =# link_to 'Destroy', roster, :confirm => 'Are you sure?', :method => :delete
 
-  - if false
-    (:id => 'roster_date_%d')
-    - rosters.each do |roster|
-      = link_to 'Show', roster
-      = link_to 'Edit', edit_roster_path(roster)
-      = link_to 'Destroy', roster, :confirm => 'Are you sure?', :method => :delete
-    = link_to 'New Roster', new_roster_path
+- if false
+  = link_to 'Show', roster
+  = link_to 'New Roster', new_roster_path

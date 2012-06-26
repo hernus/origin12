@@ -7,6 +7,7 @@ class Roster < ActiveRecord::Base
 
   alias_attribute :date, :roster_date
 
+  belongs_to :customer
   belongs_to :project
 
   after_create :initialize_key

@@ -5,6 +5,8 @@ class CreateRosters < ActiveRecord::Migration
       t.integer   :customer_id
       t.integer   :project_id
       t.date      :roster_date
+      t.integer   :shift
+      t.float     :hours
       t.integer   :billing_probability
       t.integer   :reason_id
       t.timestamps
