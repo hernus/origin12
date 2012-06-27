@@ -1,19 +1,23 @@
-.billing_probability_100 {
+.billing_probability_100,
+.billing_probability_100:visited {
 	color: white;
 	background-color: green;
 }
 
-.billing_probability_90 {
+.billing_probability_90,
+.billing_probability_90:visited {
 	color: white;
 	background-color: blue;
 }
 
-.billing_probability_50 {
+.billing_probability_50,
+.billing_probability_50:visited {
 	color: black;
 	background-color: yellow;
 }
 
-.billing_probability_0 {
+.billing_probability_0,
+.billing_probability_0:visited {
 	color: black;
 	background-color: red;
 }

@@ -127,11 +127,14 @@
 			display: inline-block;
 			float: left;
 		}
-		> span.wday {
+		span.wday {
 			margin: 0 0 0.2em 6em;
 			display: block;
-			> label {
+			label {
 				margin-left: 0.2em;
+			}
+			input[type='checkbox'][disabled] + label {
+				color: #CCC;
 			}
 		}
 	}

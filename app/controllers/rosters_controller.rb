@@ -64,8 +64,7 @@ class RostersController < ApplicationController
   private
 
   def current_date
-    # @current_date ||= params[:month] ? Date.parse(params[:month]) : Date.today
-    @current_date ||= Date.today
+    @current_date ||= params[:date] ? Date.parse(params[:date]) : Date.today
   end
 
   def rosters
