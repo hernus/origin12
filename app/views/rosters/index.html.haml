@@ -13,8 +13,8 @@
       = calendar.day(:id => 'date_%Y%m%d') do |date, rosters|
         %span.date_day= date.day
         - rosters.each do |roster|
-          = link_to roster.project.title, edit_roster_path(roster), { class: "roster billing_probability_#{roster.billing_probability}" }
-          =# link_to 'Destroy', roster, :confirm => 'Are you sure?', :method => :delete
+          = link_to roster.project.customer.short_name, edit_roster_path(roster, date: date), { class: "roster billing_probability_#{roster.billing_probability}" }
+          =# "link_to 'Destroy', roster, data: { confirm: 'Are you sure?' }, :method => :delete"
 
 - if false
   = link_to 'Show', roster

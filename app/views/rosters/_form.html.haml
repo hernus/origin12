@@ -9,10 +9,10 @@
     .customer_project.grid_3.alpha
       %span.customer
         = label 'roster_customer_id', 'Customer'
-        = collection_select :roster, :customer_id, Customer.all, :id, :display_name, prompt: true
+        = collection_select :roster, :customer_id, Customer.all, :id, :display_name, { prompt: true }, { data: { remote: true }}
       %span.project
         = label 'roster_project_id', 'Project'
-        = collection_select :roster, :project_id, [], :id, :display_name, :prompt => true
+        = collection_select :roster, :project_id, [], :id, :display_name
     .budget_invoiced.grid_3.omega
       %span.budget
         %label Budget
@@ -52,7 +52,12 @@
       %span.remaining
         %label Remaining
         %span.value $7,000.00
-  .actions
-    = button_tag 'Cancel'
-    =# link_to 'Back', rosters_path
-    = f.submit 'Save'
+  .clearfix
+    .probability.grid_3.alpha
+      %label Probability
+      = range_field_tag 'probability', 50, { in: 0..100, step: 10 }
+    .actions.grid_3.omega
+      = button_tag 'Cancel'
+      = button_tag 'Delete'
+      =# link_to 'Back', rosters_path
+      = f.submit 'Save'

@@ -95,6 +95,9 @@
 			display: inline-block;
 			width: 6em;
 		}
+		select {
+			width: 12em;
+		}
 	}
 	.budget_invoiced {
 		span.budget,
@@ -181,7 +184,21 @@
 			}
 		}
 	}
+	.probability {
+		margin-top: 1em;
+		position: relative;
+		label {
+			font-weight: bold;
+			width: 6em;
+		}
+		input[type='range'] {
+			position: relative;
+			top: 0.5em;
+			width: 12em;
+		}
+	}
 	.actions {
+		text-align: right;
 		margin-top: 1em;
 	}
 }

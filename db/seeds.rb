@@ -8,18 +8,24 @@
 
 ActiveRecord::Base.transaction do
 
+  # Companies
+  Company.delete_all
+  origin12 = Company.create!(name: 'Origin12')
+
   # Customers
   Customer.delete_all
-  wool = Customer.create!(name: 'WOOL')
-  bhp  = Customer.create!(name: 'BHP')
-  dws  = Customer.create!(name: 'DWS')
+  wool = origin12.customers.create!(name: 'WOOL')
+  bhp  = origin12.customers.create!(name: 'BHP')
+  dws  = origin12.customers.create!(name: 'DWS')
+  internal = origin12.customers.create!(name: 'SICK')
 
   # Projects
   Project.delete_all
-  wool = wool.projects.create!(title: 'WOOL')
-  bhp  = bhp.projects.create!(title: 'BHP')
-  dws  = dws.projects.create!(title: 'DWS')
-  sick = Project.create!(title: 'SICK')
+  wool1 = wool.projects.create!(name: 'WOOL Project 1', short_name: 'WOOL1')
+  wool2 = wool.projects.create!(name: 'WOOL Project 2', short_name: 'WOOL2')
+  bhp  = bhp.projects.create!(name: 'BHP Project', short_name: 'BHP')
+  dws  = dws.projects.create!(name: 'DWS Project', short_name: 'DWS')
+  sick = internal.projects.create!(name: 'SICK', short_name: 'SICK')
 
   # Rosters
   Roster.delete_all
@@ -27,7 +33,7 @@ ActiveRecord::Base.transaction do
   end_date   = Date.today.end_of_month.end_of_week(:sunday)
   (start_date..end_date).each do |roster_date|
     unless roster_date.saturday? || roster_date.sunday?
-      Roster.create!(roster_date: roster_date, project: wool, billing_probability: 100)
+      Roster.create!(roster_date: roster_date, project: wool1, billing_probability: 100)
     end
   end
 

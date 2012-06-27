@@ -2,11 +2,15 @@ class Customer < ActiveRecord::Base
 
   attr_accessible :name
 
-  has_many :projects
+  belongs_to :company
+  has_many   :projects
 
+  alias_attribute :short_name,   :name
   alias_attribute :display_name, :name
 
   after_create :initialize_key
+
+  scope :company, lambda { |company| }
 
   private
 

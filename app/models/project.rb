@@ -1,6 +1,11 @@
 class Project < ActiveRecord::Base
 
-  attr_accessible :description, :title
+  attr_accessible \
+      :description,
+      :name,
+      :short_name
+
+  alias_attribute :display_name, :name
 
   belongs_to :customer
   has_many   :rosters
