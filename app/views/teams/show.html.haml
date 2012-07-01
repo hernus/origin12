@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Key:
+  = @team.key
+%p
+  %b Parent:
+  = @team.parent_id
+%p
+  %b Manager:
+  = @team.manager_id
+%p
+  %b Description:
+  = @team.description
+%p
+  %b State:
+  = @team.state
+%p
+  %b Deleted at:
+  = @team.deleted_at
+
+= link_to 'Edit', edit_team_path(@team)
+\|
+= link_to 'Back', teams_path

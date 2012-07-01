@@ -1,0 +1,27 @@
+.teams
+  %h1 Teams
+  .grid_8.push_2.clearfix
+    %table
+      %tr
+        %th Number
+        %th Manager
+        %th Description
+        %th Status
+        %th &nbsp;
+      - teams.each do |team|
+        %tr
+          %td= team.key
+          %td
+            - team_manager = team.manager
+            = team_manager ? team_manager.full_name : '&nbsp;'.html_safe
+          %td= team.description
+          %td= team.state
+          %td
+            =# link_to 'Show', team
+            = link_to 'Edit', edit_team_path(team)
+            =# link_to 'Destroy', team, :confirm => 'Are you sure?', :method => :delete
+      %tr
+        %td{ colspan: '4' }
+        %td
+          .actions
+            = link_to 'New', new_team_path

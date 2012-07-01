@@ -1,0 +1,8 @@
+woolworths_project:
+  id: 1
+  key: WP1
+  customer_id: 1
+  manager_id: 1
+  short_name: WP1
+  name: WOOL Project 1
+  description: Woolworths Project 1

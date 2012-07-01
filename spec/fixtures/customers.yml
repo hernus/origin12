@@ -1,0 +1,6 @@
+woolworths:
+  id: 1
+  key: WOOL
+  name: Woolworths
+  company_id: 1
+

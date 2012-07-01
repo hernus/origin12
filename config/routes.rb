@@ -1,9 +1,13 @@
 Origin12::Application.routes.draw do
 
+  resources :employees, except: [ :show ]
+
+  resources :teams, except: [ :show ]
+
   resources :companies
 
   resources :customers, only: [] do
-    resources :projects, only: [ :index ]
+    resources :projects, except: [ :show ]
   end
 
   resources :rosters, only: [ :index, :new, :create, :edit, :update ]

@@ -1,21 +1,29 @@
-%h1 Listing projects
-
-%table
-  %tr
-    %th Title
-    %th Description
-    %th
-    %th
-    %th
-
-  - @projects.each do |project|
-    %tr
-      %td= project.title
-      %td= project.description
-      %td= link_to 'Show', project
-      %td= link_to 'Edit', edit_project_path(project)
-      %td= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Project', new_project_path
+.projects
+  %h1 Projects
+  .grid_8.push_2
+    %table
+      %tr
+        %th Customer
+        %th Project ID
+        %th Name
+        %th Status
+        %th Manager
+        %th &nbsp;
+      - projects.each do |project|
+        %tr
+          %td= customer.display_name
+          %td= project.short_name
+          %td= project.name
+          %td Active
+          %td
+            - project_manager = project.manager
+            = project_manager ? project_manager.full_name : '&nbsp;'.html_safe
+          %td
+            =# link_to 'Show', project
+            = link_to 'Edit', edit_customer_project_path(customer, project)
+            =# link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
+      %tr
+        %td{ colspan: '5' }
+          &nbsp;
+        %td
+          = link_to 'New', new_customer_project_path(customer)

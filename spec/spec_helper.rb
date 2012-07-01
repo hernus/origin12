@@ -30,3 +30,9 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 end
+
+# See https://github.com/rspec/rspec-rails/issues/252
+ActiveSupport::TestCase.class_eval do
+  include ActiveRecord::TestFixtures
+  self.fixture_path = RSpec.configuration.fixture_path
+end

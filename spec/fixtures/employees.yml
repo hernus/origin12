@@ -1,0 +1,15 @@
+michael:
+  id: 1
+  key: MBAM
+  first_name: Michael
+  last_name: Bamford
+  started_at: <%= Date.parse('2012-03-21') %>
+
+hernus:
+  id: 2
+  key: HCAR
+  first_name: Hernus
+  last_name: Carelsen
+  started_at: <%= Date.parse('2011-06-01') %>
+
+

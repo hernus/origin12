@@ -1,0 +1,23 @@
+.employees
+  %h1 Employees
+  .grid_8.push_2.clearfix
+    %table
+      %tr
+        %th Number
+        %th Full Name
+        %th Date Started
+        %th &nbsp;
+      - employees.each do |employee|
+        %tr
+          %td= employee.key
+          %td= employee.full_name
+          %td= employee.started_at.to_s(:long)
+          %td
+            =# link_to 'Show', employee
+            = link_to 'Edit', edit_employee_path(employee)
+            =# link_to 'Destroy', employee, :confirm => 'Are you sure?', :method => :delete
+      %tr
+        %td{ colspan: '3' }
+        %td
+          .actions
+            = link_to 'New', new_employee_path

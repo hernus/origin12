@@ -11,4 +11,19 @@ module RostersHelper
     end.html_safe
   end
 
+  def roster_customer_select
+    collection_select \
+        :roster,
+        :customer_id, Customer.all,
+        :id, :display_name,
+        { prompt: true },
+        { data: { remote: true }}
+  end
+
+  def roster_project_select
+    collection_select \
+        :roster,
+        :project_id, [],
+        :id, :display_name
+  end
 end

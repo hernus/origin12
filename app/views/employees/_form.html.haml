@@ -1,0 +1,54 @@
+= form_for employee do |f|
+  -if employee.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(employee.errors.count, "error")} prohibited this employee from being saved:"
+      %ul
+        - employee.errors.full_messages.each do |msg|
+          %li= msg
+  .employee.clearfix
+    .grid_5.alpha
+      %span.employee_key
+        = f.label :key, 'Employee Number'
+        = f.text_field :key
+      %span.employee_first_name
+        = f.label :first_name, 'First Name'
+        = f.text_field :first_name
+      %span.employee_last_name
+        = f.label :last_name, 'Last Name'
+        = f.text_field :last_name
+      %span.employee_employment_type_id
+        = f.label :employment_type_id, 'Employee Type'
+        %span Permanent
+    .grid_5.omega
+      %span.employee_started_at
+        = f.label :started_at, 'Start Date'
+        = f.date_select :started_at, { order: [ :day, :month, :year ]}
+      %span.employee_terminated_at
+        = f.label :terminated_at, 'End Date'
+        = f.date_select :terminated_at, { order: [ :day, :month, :year ], prompt: true }
+    .clearfix
+      %hr
+    %table.schedule_rates
+      %tr
+        %td Cost Rate
+        %th Card Rate
+        %th Internal Rate
+        %th End Date
+      = f.fields_for :schedule_rates do |schedule_rate|
+        %tr
+          %td
+            = schedule_rate.text_field :cost_rate
+          %td
+            = schedule_rate.text_field :card_rate
+          %td
+            = schedule_rate.text_field :internal_rate
+          %td
+            - if schedule_rate.object.until
+              = schedule_rate.date_select :until
+            - else
+              %span.infinity &#8734;
+  .clearfix
+    .actions.grid_2.push_8.alpha.omega
+      = f.submit 'Save'
+      = link_to 'Back', employees_path
+

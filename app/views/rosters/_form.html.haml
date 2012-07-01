@@ -9,10 +9,10 @@
     .customer_project.grid_3.alpha
       %span.customer
         = label 'roster_customer_id', 'Customer'
-        = collection_select :roster, :customer_id, Customer.all, :id, :display_name, { prompt: true }, { data: { remote: true }}
+        = roster_customer_select
       %span.project
         = label 'roster_project_id', 'Project'
-        = collection_select :roster, :project_id, [], :id, :display_name
+        = roster_project_select
     .budget_invoiced.grid_3.omega
       %span.budget
         %label Budget

@@ -1,6 +1,9 @@
 class ProjectsController < ApplicationController
 
-  helper_method :projects
+  helper_method \
+    :customer,
+    :projects,
+    :project
 
   def index
     respond_to do |format|
@@ -32,11 +35,6 @@ class ProjectsController < ApplicationController
   #   end
   # end
 
-  # GET /projects/1/edit
-  # def edit
-  #   @project = Project.find(params[:id])
-  # end
-
   # POST /projects
   # POST /projects.json
   # def create
@@ -53,21 +51,17 @@ class ProjectsController < ApplicationController
   #   end
   # end
 
-  # PUT /projects/1
-  # PUT /projects/1.json
-  # def update
-  #   @project = Project.find(params[:id])
-  # 
-  #   respond_to do |format|
-  #     if @project.update_attributes(params[:project])
-  #       format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-  #       format.json { head :no_content }
-  #     else
-  #       format.html { render action: "edit" }
-  #       format.json { render json: @project.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  def update
+    respond_to do |format|
+      if project.update_attributes(params[:project])
+        format.html { redirect_to customer_projects_path(customer), notice: 'Project was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: project.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /projects/1
   # DELETE /projects/1.json
@@ -81,10 +75,18 @@ class ProjectsController < ApplicationController
   #   end
   # end
 
-  private
+private
 
-  def projects
-    @projects ||= current_company.customers.find(params[:customer_id]).projects
+  def customer
+    # TODO current_company.customers.find(params[:customer_id])
+    @customer ||= Customer.find(params[:customer_id])
   end
 
+  def projects
+    @projects ||= customer.projects
+  end
+
+  def project
+    @project ||= params[:id] ? projects.find(params[:id]) : projects.build(params[:project])
+  end
 end

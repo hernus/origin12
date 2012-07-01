@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.projects  {
+.employees  {
   margin-top: 1em;
   
   h1 {
@@ -15,20 +15,31 @@
   }
 
   form {
-    .field {
-      display: block;
-      margin: 0.5em 0;
-      label {
-        display: inline-block;
-        width: 10em;
+    .employee {
+      span[class] {
+        display: block;
+        margin: 0.5em 0;
+        label {
+          display: inline-block;
+          width: 10em;
+        }
+      }
+      span.employee_started_at,
+      span.employee_terminated_at {
+        text-align: right;
       }
     }
     input[type='text'] {
       border: 1px solid #CCC;
       padding: 4px;
     }
+    .infinity {
+      text-align: center;
+      font-size: 1em;
+    }
     .actions {
       margin: 1em 0;
+      text-align: right;
     }
   }
 }
