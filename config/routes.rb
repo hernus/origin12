@@ -12,6 +12,9 @@ Origin12::Application.routes.draw do
 
   resources :rosters, only: [ :index, :new, :create, :edit, :update ]
 
+  get ':date' => 'rosters#edit'
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
