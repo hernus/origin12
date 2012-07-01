@@ -1,6 +1,6 @@
-class CreateScheduleRates < ActiveRecord::Migration
+class CreateEmployeeRates < ActiveRecord::Migration
   def change
-    create_table :schedule_rates do |t|
+    create_table :employee_rates do |t|
       t.integer   :employee_id
       t.integer   :team_id
       t.float     :cost_rate

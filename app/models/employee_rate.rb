@@ -1,4 +1,4 @@
-class ScheduleRate < ActiveRecord::Base
+class EmployeeRate < ActiveRecord::Base
 
   attr_accessible \
     :employee_id,

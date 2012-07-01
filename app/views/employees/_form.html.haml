@@ -34,17 +34,17 @@
         %th Card Rate
         %th Internal Rate
         %th End Date
-      = f.fields_for :schedule_rates do |schedule_rate|
+      = f.fields_for :employee_rates do |employee_rate|
         %tr
           %td
-            = schedule_rate.text_field :cost_rate
+            = employee_rate.text_field :cost_rate
           %td
-            = schedule_rate.text_field :card_rate
+            = employee_rate.text_field :card_rate
           %td
-            = schedule_rate.text_field :internal_rate
+            = employee_rate.text_field :internal_rate
           %td
-            - if schedule_rate.object.until
-              = schedule_rate.date_select :until
+            - if employee_rate.object.until
+              = employee_rate.date_select :until
             - else
               %span.infinity &#8734;
   .clearfix

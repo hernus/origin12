@@ -3,6 +3,7 @@ michael:
   key: MBAM
   first_name: Michael
   last_name: Bamford
+  company_id: 1
   started_at: <%= Date.parse('2012-03-21') %>
 
 hernus:
@@ -10,6 +11,7 @@ hernus:
   key: HCAR
   first_name: Hernus
   last_name: Carelsen
+  company_id: 1
   started_at: <%= Date.parse('2011-06-01') %>
 
 

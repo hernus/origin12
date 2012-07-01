@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(:version => 20120701043153) do
     t.datetime "deleted_at"
   end
 
+  create_table "employee_rates", :force => true do |t|
+    t.integer  "employee_id"
+    t.integer  "team_id"
+    t.float    "cost_rate"
+    t.float    "card_rate"
+    t.float    "internal_rate"
+    t.date     "until"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "employees", :force => true do |t|
     t.string   "key"
     t.integer  "user_id"
@@ -87,17 +98,6 @@ ActiveRecord::Schema.define(:version => 20120701043153) do
 
   add_index "rosters", ["project_id"], :name => "index_rosters_on_project_id"
   add_index "rosters", ["roster_date"], :name => "index_rosters_on_roster_date"
-
-  create_table "schedule_rates", :force => true do |t|
-    t.integer  "employee_id"
-    t.integer  "team_id"
-    t.float    "cost_rate"
-    t.float    "card_rate"
-    t.float    "internal_rate"
-    t.date     "until"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
 
   create_table "teams", :force => true do |t|
     t.string   "key"

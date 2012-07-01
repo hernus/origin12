@@ -39,7 +39,7 @@ class EmployeesController < ApplicationController
   end
 
   def edit
-    employee.schedule_rates.build
+    employee.employee_rates.build
   end
 
   def update
