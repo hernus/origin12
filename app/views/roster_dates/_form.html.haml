@@ -44,6 +44,9 @@
               = roster_form.text_field :description
             .actions
               = button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
+              - if roster_form.object.customer.present?
+                = roster_form.check_box :_destroy
+                = roster_form.label :_destroy, 'Delete'
   %hr
   .calculations
     %label Total Hours
