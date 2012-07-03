@@ -10,11 +10,15 @@ Origin12::Application.routes.draw do
     resources :projects, except: [ :show ]
   end
 
-  resources :rosters, only: [ :index, :new, :create, :edit, :update ]
+  # To get a collection of projects from a selected customer_id
+  resources :projects, only: [ :index ], constraints: { format: /json/ }
 
-  get ':date' => 'rosters#edit'
-  
-  
+  # resources :rosters, only: [ :index, :new, :create, :edit, :update ]
+  resources :roster_dates, :controller => 'roster_dates'
+
+  # Shortcuts to roster_dates's resource
+  get 'roster' => 'roster_dates#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

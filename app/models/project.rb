@@ -14,6 +14,10 @@ class Project < ActiveRecord::Base
 
   after_create :initialize_key
 
+  def as_json(opts = {})
+    super only: [ :id, :key, :name ]
+  end
+
   private
 
   def initialize_key

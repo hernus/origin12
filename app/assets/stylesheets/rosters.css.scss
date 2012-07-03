@@ -2,206 +2,123 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.rosters  {
-	margin-top: 1em;
-}
-
-.rosters h1 {
-	text-align: center;
-}
-
-.calendar table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.calendar td,
-.calendar th {
-	font-family: "Lucida Grande",arial,helvetica,sans-serif;
-	font-size: 10px;
-	padding: 6px;
-	border: 1px solid #999;
-}
-
-.calendar th {
-	background: #DDD;
-	color: #666;
-	text-align: center;
-	width: 14.2857142857143%;
-}
-
-.calendar td {
-	background: #FFF;
-	color: #777;
-	height: 80px;
-	vertical-align: top;
-	font-size: 16px;
-}
-
-.calendar .notmonth {
-  color: #CCC;
-}
-
-.calendar #month {
-	margin: 0;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-align: center;
-}
-
-.calendar #month a,
-.calendar #month a:hover {
-  text-decoration: none;
-  padding: 0 10px;
-  color: #999;
-}
-
-.calendar .weekend {
-	background-color: #EFEFEF;
-}
-.calendar .today {
-	background-color: #D7F2FF;
-}
-
-.calendar ul {
-	margin: 0;
-	margin-top: 5px;
-	padding: 0;
-	list-style: none;
-}
-
-.calendar li {
-	margin: 0;
-	padding: 0;
-	font-size: 11px;
-	text-align: center;
-}
-
-.calendar a.roster {
-	display: block;
-	width: 100%;
-	text-align: center;
-	height: 20px;
-	text-decoration: none;
-}
-
 .rosters form.edit_roster {
-	.customer_project {
-		span {
-			display: block;
-		}
-		label {
-			font-weight: bold;
-			display: inline-block;
-			width: 6em;
-		}
-		select {
-			width: 12em;
-		}
-	}
-	.budget_invoiced {
-		span.budget,
-		span.invoiced {
-			display: block;
-			float: right;
-			> span.value {
-				width: 6em;
-				display: inline-block;
-				text-align: right;
-			}
-		}
-		label {
-			width: 6em;
-			font-weight: bold;
-			display: inline-block;
-			text-align: right;
-			margin-right: 0.5em;
-		}
-	}
-	hr {
-		margin: 1em 0;
-	}
-	.days_of_week {
-		> label {
-			font-weight: bold;
-			display: inline-block;
-			float: left;
-		}
-		span.wday {
-			margin: 0 0 0.2em 6em;
-			display: block;
-			label {
-				margin-left: 0.2em;
-			}
-			input[type='checkbox'][disabled] + label {
-				color: #CCC;
-			}
-		}
-	}
-	.actions {
-		float: right;
-	}
-	.duration {
-		> span {
-			float: right;
-			clear: right;
-			display: block;
-			> label {
-				width: 6em;
-				font-weight: bold;
-				text-align: right;
-				margin-right: 0.5em;
-			}
-			> span.value {
-				width: 6em;
-				display: inline-block;
-				text-align: right;
-			}
-			input[type='text'] {
-				width: 90%;
-				border: 1px solid #AAA;
-				padding: 0.2em;
-			}
-		}
-	}
-	.protected {
-		> input[type='checkbox'] {
-			margin-left: 6em;
-		}
-		> label {
-			font-weight: bold;
-		}
-	}
-	.calculations {
-		> span {
-			clear: right;
-			float: right;
-			display: inline-block;
-			> label {
-				font-weight: bold;
-			}
-			> span.value {
-				width: 6em;
-				display: inline-block;
-				text-align: right;
-			}
-		}
-	}
-	.probability {
-		margin-top: 1em;
-		position: relative;
-		label {
-			font-weight: bold;
-			width: 6em;
-		}
-		input[type='range'] {
-			position: relative;
-			top: 0.5em;
-			width: 12em;
-		}
-	}
-	.actions {
-		text-align: right;
-		margin-top: 1em;
-	}
+  .customer_project {
+    span {
+      display: block;
+    }
+    label {
+      font-weight: bold;
+      display: inline-block;
+      width: 6em;
+    }
+    select {
+      width: 12em;
+    }
+  }
+  .budget_invoiced {
+    span.budget,
+    span.invoiced {
+      display: block;
+      float: right;
+      > span.value {
+        width: 6em;
+        display: inline-block;
+        text-align: right;
+      }
+    }
+    label {
+      width: 6em;
+      font-weight: bold;
+      display: inline-block;
+      text-align: right;
+      margin-right: 0.5em;
+    }
+  }
+  hr {
+    margin: 1em 0;
+  }
+  .days_of_week {
+    > label {
+      font-weight: bold;
+      display: inline-block;
+      float: left;
+    }
+    span.wday {
+      margin: 0 0 0.2em 6em;
+      display: block;
+      label {
+        margin-left: 0.2em;
+      }
+      input[type='checkbox'][disabled] + label {
+        color: #CCC;
+      }
+    }
+  }
+  .actions {
+    float: right;
+  }
+  .duration {
+    > span {
+      float: right;
+      clear: right;
+      display: block;
+      > label {
+        width: 6em;
+        font-weight: bold;
+        text-align: right;
+        margin-right: 0.5em;
+      }
+      > span.value {
+        width: 6em;
+        display: inline-block;
+        text-align: right;
+      }
+      input[type='text'] {
+        width: 90%;
+        border: 1px solid #AAA;
+        padding: 0.2em;
+      }
+    }
+  }
+  .protected {
+    > input[type='checkbox'] {
+      margin-left: 6em;
+    }
+    > label {
+      font-weight: bold;
+    }
+  }
+  .calculations {
+    > span {
+      clear: right;
+      float: right;
+      display: inline-block;
+      > label {
+        font-weight: bold;
+      }
+      > span.value {
+        width: 6em;
+        display: inline-block;
+        text-align: right;
+      }
+    }
+  }
+  .probability {
+    margin-top: 1em;
+    position: relative;
+    label {
+      font-weight: bold;
+      width: 6em;
+    }
+    input[type='range'] {
+      position: relative;
+      top: 0.5em;
+      width: 12em;
+    }
+  }
+  .actions {
+    text-align: right;
+    margin-top: 1em;
+  }
 }

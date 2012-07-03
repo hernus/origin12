@@ -4,15 +4,16 @@ class CreateRosters < ActiveRecord::Migration
       t.string    :key
       t.integer   :customer_id
       t.integer   :project_id
-      t.date      :roster_date
+      t.integer   :roster_date_id
       t.integer   :shift
       t.float     :hours
-      t.integer   :billing_probability
-      t.integer   :reason_id
+      t.integer   :activity_id
+      t.text      :description
       t.timestamps
       t.datetime  :deleted_at
     end
+    add_index :rosters, :customer_id
     add_index :rosters, :project_id
-    add_index :rosters, :roster_date
+    add_index :rosters, :roster_date_id
   end
 end

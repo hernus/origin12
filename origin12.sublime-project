@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/mjbamford/Repos/origin12",
+			"folder_exclude_patterns": [ "log", ".bundle" ],
+			"file_exclude_patterns": [ "*sublime*" ]
+		}
+	]
+}

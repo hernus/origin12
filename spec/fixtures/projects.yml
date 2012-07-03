@@ -1,4 +1,4 @@
-woolworths_project:
+woolworths_project_1:
   id: 1
   key: WP1
   customer_id: 1
@@ -6,3 +6,12 @@ woolworths_project:
   short_name: WP1
   name: WOOL Project 1
   description: Woolworths Project 1
+
+woolworths_project_2:
+  id: 2
+  key: WP2
+  customer_id: 1
+  manager_id: 1
+  short_name: WP2
+  name: WOOL Project 2
+  description: Woolworths Project 2

@@ -12,6 +12,20 @@ class RostersController < ApplicationController
     end
   end
 
+private
+
+  def current_date
+    @current_date ||= params[:date] ? Date.parse(params[:date]) : Date.today
+  end
+
+  def rosters
+    @rosters ||= Roster.all
+  end
+
+  def roster
+    params[:id] ? Roster.find(params[:id]) : Roster.new
+  end
+
   # def show
   #   respond_to do |format|
   #     format.html
@@ -61,18 +75,6 @@ class RostersController < ApplicationController
   #   end
   # end
 
-  private
 
-  def current_date
-    @current_date ||= params[:date] ? Date.parse(params[:date]) : Date.today
-  end
-
-  def roster_dates
-    @roster_dates ||= RosterDate.all
-  end
-
-  def roster
-    params[:id] ? Roster.find(params[:id]) : Roster.new
-  end
 
 end

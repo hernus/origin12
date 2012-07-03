@@ -11,7 +11,7 @@
     = calendar_for rosters, year: current_date.year, month: current_date.month do |calendar|
       = calendar.head 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'
       = calendar.day(id: 'date_%Y%m%d') do |date, rosters|
-        %span.date_day= date.day
+        = link_to date.day, , class: 'date_day_number'
         - rosters.each do |roster|
           = link_to roster.project.customer.short_name, edit_roster_path(roster, date: date), { class: "roster billing_probability_#{roster.billing_probability}" }
           =# "link_to 'Destroy', roster, data: { confirm: 'Are you sure?' }, :method => :delete"

@@ -1,0 +1,56 @@
+= form_for roster_date do |f|
+  = f.hidden_field :date
+  -if roster_date.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(roster_date.errors.count, "error")} prohibited this roster_date from being saved:"
+      %ul
+        - roster_date.errors.full_messages.each do |msg|
+          %li= msg
+  .clearfix
+    .employee.grid_3.alpha
+      = f.label :employee_id
+      = current_user.employee.full_name
+    .locked.grid_3.omega
+      = f.check_box :locked
+      = f.label :locked, 'Copy Protect'
+    .roster_date.grid_3.alpha
+      = label_tag :date
+      = roster_date.date.to_s(:long)
+  %hr
+  - roster_date.rosters.each_with_index do |roster, idx|
+    = f.fields_for :rosters, roster do |roster_form|
+      .roster.clearfix{ reveal_rosters(idx) }
+        = roster_form.hidden_field :shift
+        .customer
+          = roster_form.label :customer_id
+          = roster_form.collection_select :customer_id, Customer.all, :id, :display_name, { include_blank: true }, { class: 'customer', data: { remote: true, type: :json, url: "#{projects_path}" }}
+        .project
+          = roster_form.label :project_id
+          -# TODO: Refactor project collection select into a form builder
+          - if customer = roster_form.object.customer
+            = roster_form.collection_select :project_id, customer.projects, :id, :display_name, {}, { class: 'project' }
+          - else
+            = roster_form.collection_select :project_id, [], :id, :display_name, {}, { class: 'project' }
+        .hours
+          = roster_form.label :hours
+          = roster_form.text_field :hours
+        .billing_probability
+          = roster_form.label :activity_id
+          = roster_form.collection_select :activity_id, Activity.all, :id, :description
+        .description
+          = roster_form.label :description, 'Note'
+          = roster_form.text_field :description
+        .actions
+          = button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
+  %hr
+  .calculations
+    %label Total Hours
+    %span#total_hours 100
+  %hr
+  .copy_function
+    Copy #{roster_date.date.to_s(:long)} to
+    = wday_check_box_tags(roster_date.date)
+  %hr
+  .actions
+    = f.submit 'Save'
+    = link_to 'Cancel', :back

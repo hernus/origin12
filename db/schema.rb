@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120701043153) do
+ActiveRecord::Schema.define(:version => 20120703103122) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "key"
+    t.integer  "companyid"
+    t.string   "description"
+    t.integer  "display_order"
+    t.boolean  "default"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.date     "deleted_at"
+  end
 
   create_table "companies", :force => true do |t|
     t.string   "key"
@@ -82,22 +93,33 @@ ActiveRecord::Schema.define(:version => 20120701043153) do
     t.datetime "deleted_at"
   end
 
+  create_table "roster_dates", :force => true do |t|
+    t.integer  "employee_id"
+    t.date     "date"
+    t.boolean  "locked"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "roster_dates", ["employee_id", "date"], :name => "index_roster_dates_on_employee_id_and_date"
+
   create_table "rosters", :force => true do |t|
     t.string   "key"
     t.integer  "customer_id"
     t.integer  "project_id"
-    t.date     "roster_date"
+    t.integer  "roster_date_id"
     t.integer  "shift"
     t.float    "hours"
-    t.integer  "billing_probability"
-    t.integer  "reason_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.integer  "activity_id"
+    t.text     "description"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.datetime "deleted_at"
   end
 
+  add_index "rosters", ["customer_id"], :name => "index_rosters_on_customer_id"
   add_index "rosters", ["project_id"], :name => "index_rosters_on_project_id"
-  add_index "rosters", ["roster_date"], :name => "index_rosters_on_roster_date"
+  add_index "rosters", ["roster_date_id"], :name => "index_rosters_on_roster_date_id"
 
   create_table "teams", :force => true do |t|
     t.string   "key"
@@ -108,6 +130,12 @@ ActiveRecord::Schema.define(:version => 20120701043153) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.datetime "deleted_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

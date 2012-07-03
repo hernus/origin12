@@ -8,7 +8,11 @@ class Employee < ActiveRecord::Base
     :terminated_at,
     :employee_rates_attributes
 
+  belongs_to :user
+
   has_many :employee_rates
+
+  has_many :roster_dates
 
   accepts_nested_attributes_for :employee_rates, reject_if: :all_blank
 

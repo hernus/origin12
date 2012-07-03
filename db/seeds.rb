@@ -7,39 +7,16 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ActiveRecord::Base.transaction do
-
-  # Companies
-  Company.delete_all
-  origin12 = Company.create!(name: 'Origin12')
-
-  # Customers
-  Customer.delete_all
-  wool = origin12.customers.create!(name: 'WOOL')
-  bhp  = origin12.customers.create!(name: 'BHP')
-  dws  = origin12.customers.create!(name: 'DWS')
-  internal = origin12.customers.create!(name: 'SICK')
-
-  # Projects
-  Project.delete_all
-  wool1 = wool.projects.create!(name: 'WOOL Project 1', short_name: 'WOOL1')
-  wool2 = wool.projects.create!(name: 'WOOL Project 2', short_name: 'WOOL2')
-  bhp  = bhp.projects.create!(name: 'BHP Project', short_name: 'BHP')
-  dws  = dws.projects.create!(name: 'DWS Project', short_name: 'DWS')
-  sick = internal.projects.create!(name: 'SICK', short_name: 'SICK')
-
-  # Rosters
-  Roster.delete_all
-  start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
-  end_date   = Date.today.end_of_month.end_of_week(:sunday)
-  (start_date..end_date).each do |roster_date|
-    unless roster_date.saturday? || roster_date.sunday?
-      Roster.create!(roster_date: roster_date, project: wool1, billing_probability: 100)
-    end
-  end
-
-  Roster.create!(roster_date: (start_date + 5.days),  project: sick, billing_probability: 0)
-  Roster.create!(roster_date: (start_date + 10.days), project: bhp, billing_probability: 90)
-  Roster.create!(roster_date: (start_date + 10.days), project: dws, billing_probability: 50)
-  Roster.create!(roster_date: (start_date + 11.days), project: bhp, billing_probability: 90)
-
+  Activity.create([
+    { description: '100% Probability', display_order: 10 },
+    { description: '90% Probability',  display_order: 20 },
+    { description: '50% Probability',  display_order: 30 },
+    { description: '10% Probability',  display_order: 40 },
+    { description: 'Planned Bench',    display_order: 50 },
+    { description: 'Unplanned Bench',  display_order: 60, default: true },
+    { description: 'Non-Working Day',  display_order: 70 },
+    { description: 'Sick Leave',       display_order: 80 },
+    { description: 'Time Off in Lieu', display_order: 90 },
+    { description: 'Annual Leave',     display_order: 100 }
+  ])
 end

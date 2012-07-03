@@ -8,7 +8,6 @@ class ProjectsController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.js # TODO Get rid of JS response and use JSON
       format.json { render json: projects }
     end
   end
@@ -83,7 +82,7 @@ private
   end
 
   def projects
-    @projects ||= customer.projects
+    @projects ||= customer.projects.order('`key` ASC')
   end
 
   def project
