@@ -14,7 +14,7 @@
         - if roster_date = roster_date.first
           = link_to date.day, edit_roster_date_path(roster_date), class: 'roster_date_day_number' 
           - roster_date.rosters.each do |roster|
-            = link_to roster.project.customer.short_name, edit_roster_date_path(roster_date), { class: "roster activity_#{roster.activity.key}" }
+            = link_to roster.project.customer.key, edit_roster_date_path(roster_date), { class: "roster activity_#{roster.activity.key}" }
           =# "link_to 'Destroy', roster, data: { confirm: 'Are you sure?' }, :method => :delete"
         - else
           = link_to date.day, new_roster_date_path(date: date), class: 'roster_date_day_number'

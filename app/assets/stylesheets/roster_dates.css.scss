@@ -26,6 +26,14 @@
 			background-color: inherit;
 		}
 	}
+
+	.rosters {
+		.roster:last-child {
+			button.add_shift {
+				display: none;
+			}
+		}
+	}
 }
 
 .calendar td,

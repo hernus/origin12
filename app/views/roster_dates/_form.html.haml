@@ -17,31 +17,33 @@
       = label_tag :date
       = roster_date.date.to_s(:long)
   %hr
-  - roster_date.rosters.each_with_index do |roster, idx|
-    = f.fields_for :rosters, roster do |roster_form|
-      .roster.clearfix{ reveal_rosters(idx) }
-        = roster_form.hidden_field :shift
-        .customer
-          = roster_form.label :customer_id
-          = roster_form.collection_select :customer_id, Customer.all, :id, :display_name, { include_blank: true }, { class: 'customer', data: { remote: true, type: :json, url: "#{projects_path}" }}
-        .project
-          = roster_form.label :project_id
-          -# TODO: Refactor project collection select into a form builder
-          - if customer = roster_form.object.customer
-            = roster_form.collection_select :project_id, customer.projects, :id, :display_name, {}, { class: 'project' }
-          - else
-            = roster_form.collection_select :project_id, [], :id, :display_name, {}, { class: 'project' }
-        .hours
-          = roster_form.label :hours
-          = roster_form.text_field :hours
-        .billing_probability
-          = roster_form.label :activity_id
-          = roster_form.collection_select :activity_id, Activity.all, :id, :description
-        .description
-          = roster_form.label :description, 'Note'
-          = roster_form.text_field :description
-        .actions
-          = button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
+    .rosters
+      - roster_date.rosters.each_with_index do |roster, idx|
+        .roster.clearfix{ reveal_roster(roster, idx) }
+          = f.fields_for :rosters, roster do |roster_form|
+            = roster_form.hidden_field :shift
+            .customer
+              = roster_form.label :customer_id
+              -# TODO: Refactor into a form builder
+              = roster_form.collection_select :customer_id, Customer.all, :id, :display_name, { include_blank: true }, { class: 'customer', data: { remote: true, type: :json, url: "#{projects_path}" }}
+            .project
+              = roster_form.label :project_id
+              -# TODO: Refactor into a form builder
+              - if customer = roster_form.object.customer
+                = roster_form.collection_select :project_id, customer.projects, :id, :display_name, {}, { class: 'project' }
+              - else
+                = roster_form.collection_select :project_id, [], :id, :display_name, {}, { class: 'project' }
+            .hours
+              = roster_form.label :hours
+              = roster_form.text_field :hours
+            .billing_probability
+              = roster_form.label :activity_id
+              = roster_form.collection_select :activity_id, Activity.all, :id, :description
+            .description
+              = roster_form.label :description, 'Note'
+              = roster_form.text_field :description
+            .actions
+              = button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
   %hr
   .calculations
     %label Total Hours

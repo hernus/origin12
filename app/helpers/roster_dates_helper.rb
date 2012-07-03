@@ -14,8 +14,12 @@ module RosterDatesHelper
     end.html_safe
   end
 
-  def reveal_rosters(idx)
-    idx > 0 ? { style: 'display: none;' } : {}
+  def reveal_roster(roster, idx)
+    if roster.customer.present? || idx == 0
+      {}
+    else
+      { style: 'display: none;' }
+    end
   end
 
 end
