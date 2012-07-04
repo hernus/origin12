@@ -15,3 +15,12 @@ woolworths_project_2:
   short_name: WP2
   name: WOOL Project 2
   description: Woolworths Project 2
+
+bhp_project_1:
+  id: 3
+  key: BHP1
+  customer_id: 2
+  manager_id: 1
+  short_name: BHP1
+  name: BHP Project 1
+  description: BHP Project 1

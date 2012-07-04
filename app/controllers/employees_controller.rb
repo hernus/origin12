@@ -19,7 +19,7 @@ class EmployeesController < ApplicationController
 # end
  
   def new
-    employee.schedule_rates.build
+    employee.employee_rates.build
     respond_to do |format|
       format.html 
       format.json { render json: employee }

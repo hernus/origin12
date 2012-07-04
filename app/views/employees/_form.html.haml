@@ -28,7 +28,7 @@
         = f.date_select :terminated_at, { order: [ :day, :month, :year ], prompt: true }
     .clearfix
       %hr
-    %table.schedule_rates
+    %table.employee_rates
       %tr
         %td Cost Rate
         %th Card Rate
@@ -43,10 +43,11 @@
           %td
             = employee_rate.text_field :internal_rate
           %td
+            = employee_rate.date_select :until
             - if employee_rate.object.until
               = employee_rate.date_select :until
             - else
-              %span.infinity &#8734;
+              -# %span.infinity &#8734;
   .clearfix
     .actions.grid_2.push_8.alpha.omega
       = f.submit 'Save'

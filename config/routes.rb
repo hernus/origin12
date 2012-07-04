@@ -14,7 +14,9 @@ Origin12::Application.routes.draw do
   resources :projects, only: [ :index ], constraints: { format: /json/ }
 
   # resources :rosters, only: [ :index, :new, :create, :edit, :update ]
-  resources :roster_dates, :controller => 'roster_dates'
+  resources :roster_dates, :controller => 'roster_dates' do
+    match :duplicate, :via => [ :get, :post ]
+  end
 
   # Shortcuts to roster_dates's resource
   get 'roster' => 'roster_dates#index'

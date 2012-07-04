@@ -8,24 +8,23 @@
 	border-bottom: 1px solid black;
 }
 
-.header ul.main-menu {
+.header ul.nav {
 	list-style: none;
-	top: 12px
+	top: 15px;
 }
 
-.header ul.main-menu li {
-	float: left;
+.header ul.nav > li {
+	/*float: left;*/
 }
 
-.header ul.main-menu span,
-.header ul.main-menu a,
-.header ul.main-menu a:visited {
+.header ul.nav a,
+.header ul.nav a:visited {
 	color: white;
 	text-decoration: none;
 }
 
-.header ul.main-menu a:hover,
-.header ul.main-menu a:active {
+.header ul.nav a:hover,
+.header ul.nav a:active {
 	text-decoration: underline;
 	background-color: inherit;
 }

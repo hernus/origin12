@@ -1,21 +1,20 @@
-%h1 Listing companies
-
-%table
-  %tr
-    %th Key
-    %th Name
-    %th
-    %th
-    %th
-
-  - @companies.each do |company|
-    %tr
-      %td= company.key
-      %td= company.name
-      %td= link_to 'Show', company
-      %td= link_to 'Edit', edit_company_path(company)
-      %td= link_to 'Destroy', company, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Company', new_company_path
+.companies
+  %h1 Companies
+  .grid_8.push_2.clearfix
+    %table.index
+      %tr
+        %th Key
+        %th Name
+        %th &nbsp;
+      - companies.each do |company|
+        %tr{ color_cycle }
+          %td= company.key
+          %td= company.name
+          %td
+            = link_to 'Edit', edit_company_path(company)
+            =# link_to 'Destroy', company, :confirm => 'Are you sure?', :method => :delete
+      %tr
+        %td{ colspan: '2' }
+        %td
+          .actions
+            = link_to 'New', new_company_path

@@ -71,7 +71,7 @@
   .copy_function
     %span.source_roster_date
       Copy #{roster_date.date.strftime('%A, %B %e')} To:
-    = wday_check_box_tags(roster_date.date, '%a, %b %e')
+    = wday_check_box_tags_for_specific_week roster_date.date, '%a, %b %e'
   %hr
   .actions
     = f.submit 'Save'

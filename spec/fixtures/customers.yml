@@ -4,3 +4,9 @@ woolworths:
   name: Woolworths
   company_id: 1
 
+bhp:
+  id: 2
+  key: BHP
+  name: BHP Billiton
+  company_id: 1
+

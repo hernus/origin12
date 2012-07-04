@@ -25,9 +25,39 @@
 			color: #666;
 			background-color: inherit;
 		}
+		a.duplicate,
+		a.delete {
+			display: inline-block;
+			text-decoration: none;
+			float: right;
+			font-size: 0.5em;
+			color: #999;
+			&:hover {
+				background-color: inherit;
+				text-decoration: underline;
+			}
+		}
 	}
 
-	form {
+	&.duplicate {
+		.wday {
+			display: block;
+			label {
+				margin-left: 0.2em;
+			}
+		}
+		.weeks {
+			text-align: right;
+			input[type='text'] {
+				padding: 4px;
+				border: 1px solid #CCC;
+				width: 6em;
+			}
+		}
+	}	
+
+	form.new_roster_date,
+	form.edit_roster_date {
 		hr {
 			margin: 1em 0;
 		}

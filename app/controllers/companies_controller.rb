@@ -1,23 +1,20 @@
 class CompaniesController < ApplicationController
-  # GET /companies
-  # GET /companies.json
-  def index
-    @companies = Company.all
 
+  helper_method \
+      :companies
+      :company
+
+  def index
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @companies }
+      format.html
+      format.json { render json: companies }
     end
   end
 
-  # GET /companies/1
-  # GET /companies/1.json
   def show
-    @company = Company.find(params[:id])
-
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @company }
+      format.html
+      format.json { render json: company }
     end
   end
 
@@ -80,4 +77,15 @@ class CompaniesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private
+
+  def companies
+    @companies ||= Company.all
+  end
+
+  def company
+    @company ||= Company.find(params[:id])    
+  end
+
 end

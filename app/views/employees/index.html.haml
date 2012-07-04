@@ -1,14 +1,14 @@
 .employees
   %h1 Employees
   .grid_8.push_2.clearfix
-    %table
+    %table.index
       %tr
         %th Number
         %th Full Name
         %th Date Started
         %th &nbsp;
       - employees.each do |employee|
-        %tr
+        %tr{ color_cycle }
           %td= employee.key
           %td= employee.full_name
           %td= employee.started_at.to_s(:long)

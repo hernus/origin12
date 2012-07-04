@@ -3,9 +3,12 @@ class RosterDatesController < ApplicationController
   helper_method \
       :current_date,
       :roster_dates,
-      :roster_date
+      :roster_date,
+      :duplicate_date
 
-  before_filter :build_roster_date_with_shifts, only: [ :new, :edit ]
+  before_filter :build_default_roster_date, only: [ :new, :edit ]
+
+  before_filter :build_roster_date, only: [ :create ]
 
   def index
     respond_to do |format|
@@ -22,9 +25,9 @@ class RosterDatesController < ApplicationController
   end
 
   def create
-    @roster_date = current_employee.roster_dates.build(params[:roster_date])    
     respond_to do |format|
       if roster_date.save
+        roster_date.duplicate(*params[:wday])
         format.html { redirect_to roster_dates_path, notice: 'Roster date was successfully created.' }
         format.json { render json: roster_date, status: :created, location: roster_date }
       else
@@ -37,6 +40,7 @@ class RosterDatesController < ApplicationController
   def update
     respond_to do |format|
       if roster_date.update_attributes(params[:roster_date])
+        roster_date.duplicate(*params[:wday])
         format.html { redirect_to roster_dates_path, notice: 'Roster date was successfully updated.' }
         format.json { head :no_content }
       else
@@ -67,8 +71,16 @@ private
     @roster_date = current_employee.roster_dates.build(date: date).tap { |rd| rd.build_shifts }
   end
 
-  def build_roster_date_with_shifts
+  def build_roster_date
+    @roster_date = roster_dates.build(params[:roster_date])  
+  end
+
+  def build_default_roster_date
     roster_date.build_shifts
+  end
+
+  def duplicate_date
+    @duplicate_date ||= Date.parse(params[:roster_date_id])
   end
 
   # def show
@@ -79,14 +91,9 @@ private
   #   end
   # end
 
-
-
-  # DELETE /roster_dates/1
-  # DELETE /roster_dates/1.json
   # def destroy
   #   @roster_date = RosterDate.find(params[:id])
   #   @roster_date.destroy
-
   #   respond_to do |format|
   #     format.html { redirect_to roster_dates_url }
   #     format.json { head :no_content }

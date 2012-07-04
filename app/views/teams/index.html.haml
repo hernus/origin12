@@ -1,7 +1,7 @@
 .teams
   %h1 Teams
   .grid_8.push_2.clearfix
-    %table
+    %table.index
       %tr
         %th Number
         %th Manager
@@ -9,7 +9,7 @@
         %th Status
         %th &nbsp;
       - teams.each do |team|
-        %tr
+        %tr{ color_cycle }
           %td= team.key
           %td
             - team_manager = team.manager
