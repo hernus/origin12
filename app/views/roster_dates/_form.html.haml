@@ -12,49 +12,66 @@
       = current_user.employee.full_name
     .locked.grid_3.omega
       = f.check_box :locked
-      = f.label :locked, 'Copy Protect'
-    .roster_date.grid_3.alpha
-      = label_tag :date
-      = roster_date.date.to_s(:long)
-  %hr
-    .rosters
-      - roster_date.rosters.each_with_index do |roster, idx|
-        .roster.clearfix{ reveal_roster(roster, idx) }
+      = f.label :locked, 'Copy protect'
+  .rosters.clearfix
+    - roster_date.rosters.each_with_index do |roster, idx|
+      .roster.clearfix{ reveal_roster(roster, idx) }
+        %hr
+        %table
           = f.fields_for :rosters, roster do |roster_form|
-            = roster_form.hidden_field :shift
-            .customer
-              = roster_form.label :customer_id
-              -# TODO: Refactor into a form builder
-              = roster_form.collection_select :customer_id, Customer.all, :id, :display_name, { include_blank: true }, { class: 'customer', data: { remote: true, type: :json, url: "#{projects_path}" }}
-            .project
-              = roster_form.label :project_id
-              -# TODO: Refactor into a form builder
-              - if customer = roster_form.object.customer
-                = roster_form.collection_select :project_id, customer.projects, :id, :display_name, {}, { class: 'project' }
-              - else
-                = roster_form.collection_select :project_id, [], :id, :display_name, {}, { class: 'project' }
-            .hours
-              = roster_form.label :hours
-              = roster_form.text_field :hours
-            .billing_probability
-              = roster_form.label :activity_id
-              = roster_form.collection_select :activity_id, Activity.all, :id, :description
-            .description
-              = roster_form.label :description, 'Note'
-              = roster_form.text_field :description
-            .actions
-              = button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
-              - if roster_form.object.customer.present?
-                = roster_form.check_box :_destroy
-                = roster_form.label :_destroy, 'Delete'
+            %tr
+              %td
+                = roster_form.hidden_field :shift
+                .customer
+                  = roster_form.label :customer_id
+                  -# TODO: Refactor into a form builder
+                  = roster_form.collection_select :customer_id, Customer.all, :id, :display_name, { include_blank: true }, { class: 'customer', data: { remote: true, type: :json, url: "#{projects_path}" }}
+              %td
+                .hours
+                  = roster_form.label :hours
+                  = roster_form.text_field :hours
+            %tr
+              %td
+                .project
+                  = roster_form.label :project_id
+                  -# TODO: Refactor into a form builder
+                  - if customer = roster_form.object.customer
+                    = roster_form.collection_select :project_id, customer.projects, :id, :display_name, {}, { class: 'project' }
+                  - else
+                    = roster_form.collection_select :project_id, [], :id, :display_name, {}, { class: 'project' }
+              %td
+                &nbsp;
+            %tr
+              %td
+                .activity
+                  = roster_form.label :activity_id
+                  = roster_form.collection_select :activity_id, Activity.all, :id, :description
+              %td
+                &nbsp;
+            %tr
+              %td
+                .description
+                  = roster_form.label :description, 'Note'
+                  = roster_form.text_field :description
+              %td
+                .actions
+                  = button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
+                  - if roster_form.object.customer.present?
+                    = roster_form.check_box :_destroy
+                    = roster_form.label :_destroy, 'Delete'
   %hr
   .calculations
-    %label Total Hours
-    %span#total_hours 100
+    .total_hours
+      %label Total Hours
+      %span#total_hours 8.0
+    .total_amount
+      %label Total Amount
+      %span#total_amount $1,300.00
   %hr
   .copy_function
-    Copy #{roster_date.date.to_s(:long)} to
-    = wday_check_box_tags(roster_date.date)
+    %span.source_roster_date
+      Copy #{roster_date.date.strftime('%A, %B %e')} To:
+    = wday_check_box_tags(roster_date.date, '%a, %b %e')
   %hr
   .actions
     = f.submit 'Save'

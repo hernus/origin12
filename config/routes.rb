@@ -19,6 +19,8 @@ Origin12::Application.routes.draw do
   # Shortcuts to roster_dates's resource
   get 'roster' => 'roster_dates#index'
 
+  root :to => 'roster_dates#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

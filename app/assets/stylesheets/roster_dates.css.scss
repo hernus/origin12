@@ -27,7 +27,114 @@
 		}
 	}
 
-	.rosters {
+	form {
+		hr {
+			margin: 1em 0;
+		}
+		input[type='text'] {
+			margin: 0;
+			padding: 4px;
+			border: 1px solid #CCC;
+		}
+		table {
+			width: 100%;
+			margin-bottom: 0;
+			td {
+				height: 2em;
+				vertical-align: middle;
+			}
+		}
+		.employee {
+			label {
+				display: inline-block;
+				font-weight: bold;
+				width: 6em;
+			}
+		}
+		.locked {
+			text-align: right;
+		}
+		.customer {
+			select {
+				width: 12em;
+			}
+			label {
+				display: inline-block;
+				font-weight: bold;
+				width: 6em;
+			}
+		}
+		.project {
+			select {
+				width: 12em;
+			}
+			label {
+				display: inline-block;
+				font-weight: bold;
+				width: 6em;		
+			}
+		}
+		.activity {
+			select {
+				width: 12em;
+			}
+			label {
+				display: inline-block;
+				font-weight: bold;
+				width: 6em;		
+			}
+		}
+		.hours {
+			text-align: right;
+			input {
+				width: 6em;
+			}
+			label {
+				display: inline-block;
+				font-weight: bold;
+				width: 6em;
+				margin-right: 0.5em;	
+			}
+		}
+		.description {
+			label {
+				display: inline-block;
+				font-weight: bold;
+				width: 6em;
+			}
+			input {
+				width: 18em;
+			}
+		}
+		.actions {
+			text-align: right;
+			margin: 0;
+		}
+		.calculations {
+			text-align: right;
+			label {
+				font-weight: bold;
+			}
+			#total_hours,
+			#total_amount {
+				display: inline-block;
+				width: 6em;
+			}
+		}
+		.source_roster_date {
+			font-weight: bold;
+			display: block;
+		}
+		.wdays {
+			display: table;
+			width: 100%;
+			.wday {
+					display: table-cell;
+					label {
+						margin-left: 0.5em;
+					}
+			}
+		}
 		.roster:last-child {
 			button.add_shift {
 				display: none;
