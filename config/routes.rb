@@ -14,11 +14,13 @@ Origin12::Application.routes.draw do
   resources :projects, only: [ :index ], constraints: { format: /json/ }
 
   # resources :rosters, only: [ :index, :new, :create, :edit, :update ]
-  resources :roster_dates, :controller => 'roster_dates' do
-    match :duplicate, :via => [ :get, :post ]
-  end
+  resources :roster_dates, :controller => 'roster_dates'
 
-  # Shortcuts to roster_dates's resource
+  # To duplication a week of roster dates
+  get  'roster_dates/:duplicate_date/copy' => 'roster_dates#copy', :as => 'copy_roster_date'
+  post 'roster_dates/duplicate' => 'roster_dates#duplicate', :as => 'copy_roster_dates'
+
+  # Human-readable shortcut to RosterDate resources
   get 'roster' => 'roster_dates#index'
 
   root :to => 'roster_dates#index'

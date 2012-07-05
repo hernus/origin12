@@ -19,7 +19,7 @@
         - else
           = link_to date.day, new_roster_date_path(date: date), class: 'roster_date_day_number'        
         - if date.saturday?
-          = link_to 'Copy', roster_date_duplicate_path(date.beginning_of_week(:sunday)), { class: 'duplicate' }
+          = link_to 'Copy', copy_roster_date_path(date.beginning_of_week(:sunday)), { class: 'duplicate' }
 - if false
   = link_to 'Show', roster
   = link_to 'New Roster', new_roster_path

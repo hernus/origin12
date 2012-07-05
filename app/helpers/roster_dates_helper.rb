@@ -24,7 +24,7 @@ module RosterDatesHelper
         day_name, idx = day_name_with_idx
         id = "wday_#{idx}"
         html << content_tag(:span, { class: 'wday' }) do
-          check_box_tag('wday[]', idx, false, { id: id }) + label_tag(id, day_name)
+          check_box_tag('duplicate[wday][]', idx, false, { id: id }) + label_tag(id, day_name)
         end
       end.html_safe
     end

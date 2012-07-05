@@ -50,7 +50,21 @@ class RosterDatesController < ApplicationController
     end
   end
 
+  def duplicate
+    respond_to do |format|
+      if RosterDate.duplicate(params[:duplicate], current_employee)
+        format.html { redirect_to roster_dates_path, notice: 'Roster week was successfully duplicated.' }
+        format.json { head :no_content }        
+      else
+        format.html { render action: "edit" }
+        format.json { head :status, :unprocessable_entity }
+      end
+    end
+  end
+
 private
+
+  ### Exposures
 
   def roster_dates
     @roster_dates ||= current_employee.roster_dates
@@ -80,7 +94,7 @@ private
   end
 
   def duplicate_date
-    @duplicate_date ||= Date.parse(params[:roster_date_id])
+    @duplicate_date ||= Date.parse(params[:duplicate_date])
   end
 
   # def show

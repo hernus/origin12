@@ -12,11 +12,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.last(include: :employee)
+    @current_user ||= current_employee.user # User....(include: :employee)
   end
 
   def current_employee
-    @current_employee ||= current_user.employee
+    @current_employee ||= Employee.find_by_first_name('hernus') # current_user.employee
   end
 
 end
