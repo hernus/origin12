@@ -59,6 +59,14 @@ class Roster < ActiveRecord::Base
 
   after_initialize :initialize_new_record
 
+  def dup
+    roster = super
+    roster_schedule_rates.each do |roster_schedule_rate|
+      roster.roster_schedule_rates << roster_schedule_rate.dup
+    end
+    roster
+  end
+
 private
 
   def initialize_key

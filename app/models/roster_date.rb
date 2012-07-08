@@ -58,15 +58,13 @@ class RosterDate < ActiveRecord::Base
   # Duplicate roster_date for new dates provided
   # either as strings (yyyy-mm-dd) or date objects.
   def duplicate(*dates)
-    self.class.transaction do
-      map_date_strings_to_dates! dates
-      RosterDate.destroy_all(date: dates, employee_id: self.employee_id, locked: false)
-      dates.each do |date|
-        dup_roster_date = self.dup
-        dup_roster_date.date = date
-        dup_roster_date.rosters << rosters.map(&:dup)
-        dup_roster_date.save
-      end
+    map_date_strings_to_dates! dates
+    RosterDate.destroy_all(date: dates, employee_id: self.employee_id, locked: false)
+    dates.each do |date|
+      roster_date = self.dup
+      roster_date.date = date
+      roster_date.rosters << rosters.map(&:dup)
+      roster_date.save
     end
   end
 
