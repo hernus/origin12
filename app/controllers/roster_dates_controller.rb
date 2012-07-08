@@ -82,7 +82,7 @@ private
 
   def new_roster_date
     date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @roster_date = current_employee.roster_dates.build(date: date).tap { |rd| rd.build_shifts }
+    @roster_date = current_employee.roster_dates.build(date: date)
   end
 
   def build_roster_date
@@ -90,7 +90,7 @@ private
   end
 
   def build_default_roster_date
-    roster_date.build_shifts
+    roster_date.build_default_rosters
   end
 
   def duplicate_date

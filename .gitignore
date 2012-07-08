@@ -35,7 +35,8 @@ rerun.txt
 pickle-email-*.html
 
 # Vim
-tags
+.tags
+.tags_sorted_by_file
 **.swp
 
 *.sublime-workspace

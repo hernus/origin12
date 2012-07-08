@@ -30,8 +30,23 @@ jQuery(function($) {
 
 	$('.roster_dates button.add_shift')
 		.on('click', function() {
-			$(this).closest('.roster').nextAll('.roster:first').show();
+			$(this)
+				.hide()
+				.closest('.roster')
+				.nextAll('.roster:first')
+				.show();
 			return false;
+		});
+
+	$('.roster_dates')
+		.on('click', 'button.add_schedule', function() {
+			var $this  = $(this);
+			var $tr    = $this.closest('tr');
+			var $tbody = $tr.closest('tbody');
+			var idx    = $tbody.find('tr').length;
+			var html   = $tr[0].outerHTML.replace(/(schedule_rates_attributes)(_|\]\[)\d+/g, "$1$2" + idx );
+			$tbody.append(html);
+			$this.hide();
 		});
 
 });

@@ -24,7 +24,7 @@
                 = roster_form.hidden_field :shift
                 .customer
                   = roster_form.label :customer_id
-                  -# TODO: Refactor into a form builder
+                  - # TODO: Refactor into a form builder
                   = roster_form.collection_select :customer_id, Customer.all, :id, :display_name, { include_blank: true }, { class: 'customer', data: { remote: true, type: :json, url: "#{projects_path}" }}
               %td
                 .hours
@@ -34,7 +34,7 @@
               %td
                 .project
                   = roster_form.label :project_id
-                  -# TODO: Refactor into a form builder
+                  - # TODO: Refactor into a form builder
                   - if customer = roster_form.object.customer
                     = roster_form.collection_select :project_id, customer.projects, :id, :display_name, {}, { class: 'project' }
                   - else
@@ -54,11 +54,47 @@
                   = roster_form.label :description, 'Note'
                   = roster_form.text_field :description
               %td
+                &nbsp;
+            %tr
+              %td{ colspan: '2' }
+                %hr
+            %tr
+              %td{ colspan: '2' }
+                %table
+                  %thead
+                    %tr
+                      %th Verified
+                      %th Rate
+                      %th &nbsp;
+                  %tbody
+                    = roster_form.fields_for :schedule_rates do |schedule_rate|
+                      %tr
+                        %td
+                          hello
+                          = # schedule_rate.state :state
+                          = check_box_tag 'Verified', true, {}, { disabled: true }
+                        %td
+                          = schedule_rate.text_field :contract_rate
+                        %td
+                          - if schedule_rate.object.until
+                            = schedule_rate.date_select :until
+                          - else
+                            %span
+                              Until end of project
+                            = # schedule_rate.date_select :until
+                          = button_tag 'Add Schedule', { type: 'button', class: 'add_schedule' }
+            %tr
+              %td{ colspan: '2' }
+                %hr
+            %tr
+              %td{ colspan: '2' }
                 .actions
                   = button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
-                  - if roster_form.object.customer.present?
+                  - unless roster_form.object.new_record?
                     = roster_form.check_box :_destroy
-                    = roster_form.label :_destroy, 'Delete'
+                    = roster_form.label :_destroy, 'Delete Shift'
+
+
   %hr
   .calculations
     .total_hours

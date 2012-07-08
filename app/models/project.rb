@@ -10,7 +10,9 @@ class Project < ActiveRecord::Base
 
   belongs_to :customer
   belongs_to :manager, class_name: 'Employee'
-  has_many   :rosters
+
+  has_many :rosters
+  has_many :schedule_rates
 
   after_create :initialize_key
 

@@ -1,6 +1,7 @@
 class RosterDate < ActiveRecord::Base
 
   MAXIMUM_SHIFTS = 3
+  ETERNITY_DATE = Date.parse('9999-12-31')
 
   attr_accessible \
     :date,
@@ -27,11 +28,20 @@ class RosterDate < ActiveRecord::Base
   belongs_to :employee
 
   has_many :rosters, :dependent => :destroy
- 
-  accepts_nested_attributes_for :rosters, allow_destroy: true, reject_if: proc { |attrs| attrs['project_id'].blank? }
 
-  def build_shifts
-    (MAXIMUM_SHIFTS - rosters.length).times { |shift| rosters.build shift: shift }
+  accepts_nested_attributes_for :rosters,
+      allow_destroy: true,
+      reject_if: proc { |attrs| attrs['customer_id'].blank? || attrs['project_id'].blank? }
+
+  def build_default_rosters
+    (MAXIMUM_SHIFTS - rosters.length).times do |shift|
+      rosters.build shift: shift
+    end
+    rosters.each do |roster|
+      if roster.schedule_rates.empty?
+        roster.schedule_rates.build
+      end
+    end
   end
 
   def self.duplicate(params, employee)
@@ -68,7 +78,7 @@ private
   end
 
   def self.future_dates(roster_date, weeks)
-    ([ roster_date ] * weeks.abs).each_with_index.map do |roster_date, week_ordinal|
+    ([ roster_date ] * (weeks.abs - 1)).each_with_index.map do |roster_date, week_ordinal|
       roster_date.date + (week_ordinal + 1).weeks
     end
   end

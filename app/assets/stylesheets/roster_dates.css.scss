@@ -60,6 +60,14 @@
 	form.edit_roster_date {
 		hr {
 			margin: 1em 0;
+			border-top: 1px solid #CCC;
+			color: #FFF;
+			background-color: #FFF;
+			height: 1px;
+			width: 100%;			
+		}
+		table hr {
+			border-top: 1px dotted #CCC;
 		}
 		input[type='text'] {
 			margin: 0;
@@ -158,8 +166,10 @@
 		.wdays {
 			display: table;
 			width: 100%;
+			margin-top: 0.5em;
 			.wday {
 					display: table-cell;
+					text-align: center;
 					label {
 						margin-left: 0.5em;
 					}

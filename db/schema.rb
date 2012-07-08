@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120703103122) do
+ActiveRecord::Schema.define(:version => 20120708061016) do
 
   create_table "activities", :force => true do |t|
     t.string   "key"
-    t.integer  "companyid"
+    t.integer  "company_id"
     t.string   "description"
     t.integer  "display_order"
+    t.string   "color"
     t.boolean  "default"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
@@ -103,8 +104,16 @@ ActiveRecord::Schema.define(:version => 20120703103122) do
 
   add_index "roster_dates", ["employee_id", "date"], :name => "index_roster_dates_on_employee_id_and_date"
 
+  create_table "roster_schedule_rates", :force => true do |t|
+    t.integer  "roster_id",        :null => false
+    t.integer  "schedule_rate_id", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "rosters", :force => true do |t|
     t.string   "key"
+    t.integer  "company_id"
     t.integer  "customer_id"
     t.integer  "project_id"
     t.integer  "roster_date_id"
@@ -117,9 +126,19 @@ ActiveRecord::Schema.define(:version => 20120703103122) do
     t.datetime "deleted_at"
   end
 
-  add_index "rosters", ["customer_id"], :name => "index_rosters_on_customer_id"
   add_index "rosters", ["project_id"], :name => "index_rosters_on_project_id"
   add_index "rosters", ["roster_date_id"], :name => "index_rosters_on_roster_date_id"
+
+  create_table "schedule_rates", :force => true do |t|
+    t.integer  "customer_id"
+    t.integer  "company_id"
+    t.integer  "project_id"
+    t.string   "state"
+    t.float    "contract_rate"
+    t.date     "until"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "teams", :force => true do |t|
     t.string   "key"

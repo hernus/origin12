@@ -32,9 +32,11 @@ div {
   color: green; }
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table; }
+  display: inline;
+  label {
+    color: red;
+  }
+}
 
 #error_explanation {
   width: 450px;
