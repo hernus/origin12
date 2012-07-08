@@ -38,9 +38,10 @@ class RosterDate < ActiveRecord::Base
       rosters.build shift: shift
     end
     rosters.each do |roster|
-      if roster.schedule_rates.empty?
+      # Always include one empty schedule rate
+      # if roster.schedule_rates.empty?
         roster.schedule_rates.build
-      end
+      # end
     end
   end
 
@@ -78,7 +79,7 @@ private
   end
 
   def self.future_dates(roster_date, weeks)
-    ([ roster_date ] * (weeks.abs - 1)).each_with_index.map do |roster_date, week_ordinal|
+    ([ roster_date ] * weeks.abs).each_with_index.map do |roster_date, week_ordinal|
       roster_date.date + (week_ordinal + 1).weeks
     end
   end

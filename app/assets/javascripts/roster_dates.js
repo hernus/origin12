@@ -46,7 +46,12 @@ jQuery(function($) {
 			var idx    = $tbody.find('tr').length;
 			var html   = $tr[0].outerHTML.replace(/(schedule_rates_attributes)(_|\]\[)\d+/g, "$1$2" + idx );
 			$tbody.append(html);
-			$this.hide();
+			$this
+				.hide()
+				.prevAll('.until_date')
+				.show()
+				.prevAll('.until_end_of_project')
+				.hide();
 		});
 
 });

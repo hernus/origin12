@@ -17,7 +17,7 @@
     - roster_date.rosters.each_with_index do |roster, idx|
       .roster.clearfix{ reveal_roster(roster, idx) }
         %hr
-        %table
+        %table{ cellpadding: '0' }
           = f.fields_for :rosters, roster do |roster_form|
             %tr
               %td
@@ -60,29 +60,35 @@
                 %hr
             %tr
               %td{ colspan: '2' }
-                %table
+                %table.schedule_rates{ cellpadding: '0' }
                   %thead
                     %tr
-                      %th Verified
-                      %th Rate
+                      %th.verified
+                        %label
+                          Verified
+                      %th.rate
+                        %label
+                          Rate
                       %th &nbsp;
                   %tbody
                     = roster_form.fields_for :schedule_rates do |schedule_rate|
                       %tr
-                        %td
-                          hello
+                        %td.verified
                           = # schedule_rate.state :state
                           = check_box_tag 'Verified', true, {}, { disabled: true }
-                        %td
+                        %td.rate
                           = schedule_rate.text_field :contract_rate
-                        %td
+                        %td.until
+                          Until
                           - if schedule_rate.object.until
-                            = schedule_rate.date_select :until
+                            %span.until_date
+                              = schedule_rate.date_select :until, order: [ :day, :month, :year ]
                           - else
-                            %span
-                              Until end of project
-                            = # schedule_rate.date_select :until
-                          = button_tag 'Add Schedule', { type: 'button', class: 'add_schedule' }
+                            %span.until_end_of_project
+                              end of project
+                            %span.until_date{ class: 'hidden' }
+                              = schedule_rate.date_select :until, order: [ :day, :month, :year ]
+                            = button_tag 'Add Schedule', { type: 'button', class: 'add_schedule' }
             %tr
               %td{ colspan: '2' }
                 %hr
@@ -99,10 +105,11 @@
   .calculations
     .total_hours
       %label Total Hours
-      %span#total_hours 8.0
-    .total_amount
-      %label Total Amount
-      %span#total_amount $1,300.00
+      %span#total_hours 0.0
+    - if false
+      .total_amount
+        %label Total Amount
+        %span#total_amount $1,300.00
   %hr
   .copy_function
     %span.source_roster_date

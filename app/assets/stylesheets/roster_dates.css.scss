@@ -144,6 +144,26 @@
 				width: 18em;
 			}
 		}
+		.schedule_rates {
+			width: 90%;
+			margin: 0 auto;
+			th label {
+				font-weight: bold;
+				display: inline-block;
+
+			}
+			th.verified,
+			td.verified {
+				text-align: center;
+				width: 6em;
+			}
+			td.rate input[type='text'] {
+				width: 6em;
+			}
+			td.until {
+				text-align: right;				
+			}
+		}
 		.actions {
 			text-align: right;
 			margin: 0;

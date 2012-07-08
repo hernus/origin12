@@ -40,11 +40,20 @@ class Roster < ActiveRecord::Base
       allow_destroy: true,
       reject_if: proc { |attrs| attrs['contract_rate'].blank? }
 
-  def schedule_rates_attributes=(attributes)
+  def schedule_rates_attributes_with_project=(attributes)
     attributes.each do |index, attributes|
       attributes.merge! project_id: project_id
     end
+    self.schedule_rates_attributes_without_project = attributes
   end
+
+  alias \
+      :schedule_rates_attributes_without_project= \
+      :schedule_rates_attributes=
+
+  alias \
+      :schedule_rates_attributes= \
+      :schedule_rates_attributes_with_project=
 
   after_create :initialize_key
 
