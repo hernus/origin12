@@ -38,4 +38,12 @@ module RosterDatesHelper
     end
   end
 
+  def calendar_last_date(roster_dates)
+    if roster_date = roster_dates.last
+      roster_date.date
+    else
+      Date.today + 4.weeks
+    end
+  end
+
 end
