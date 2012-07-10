@@ -1,29 +1,29 @@
 .schedule_rates.index.grid_6.push_3
   %h1 Rates Schedule
-  .employee_full_name.grid_3.alpha
-    %label Employee
-    %span #{current_employee.full_name}
-  .project_display_name.grid_3.omega
-    %div
-      %label Customer
-      %span #{project.customer.display_name}
-    %div
-      %label Project
-      %span #{project.display_name}
+  = render 'header'
   %table
     %tr
       %th.verified Verified
-      %th.schedule_date Rate
+      %th.schedule_rate Daily Rate
       %th.until Until
-    - schedule_rates.each do |schedule_rate|
+    - if schedule_rates.empty?
       %tr
-        %td.verified
-          = # schedule_rate.state :state
-          = check_box_tag 'Verified', true, {}, { disabled: true }
-        %td.schedule_date
-          = schedule_rate.contract_rate
-        %td.until
-          = schedule_rate.until
+        %td.empty_schedule{ colspan: '3' }
+          No Contract Rates
+    - else
+      - schedule_rates.chronological.each do |schedule_rate|
+        %tr
+          %td.verified
+            = # schedule_rate.state :state
+            = check_box_tag 'Verified', true, {}, { disabled: true }
+          %td.schedule_rate
+            = schedule_rate.contract_rate
+          %td.until
+            - if schedule_rate.until
+              = schedule_rate.until.strftime '%A, %B %e %Y'
+            - else
+              Until end of project
+  %hr
   .clearfix
     .actions
       = link_to 'Add Schedule', new_project_schedule_rate_path(project)

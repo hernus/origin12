@@ -1,0 +1,11 @@
+.header
+  .employee_full_name.grid_3.alpha
+    %label Employee
+    %span #{current_employee.full_name}
+  .project_display_name.grid_3.omega
+    %div
+      %label Customer
+      %span #{project.customer.display_name}
+    %div
+      %label Project
+      %span #{project.display_name}

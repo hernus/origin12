@@ -28,8 +28,6 @@ class ScheduleRatesController < ApplicationController
     end
   end
 
-  # PUT /schedule_rates/1
-  # PUT /schedule_rates/1.json
   def update
     @schedule_rate = ScheduleRate.find(params[:id])
     respond_to do |format|
@@ -43,16 +41,14 @@ class ScheduleRatesController < ApplicationController
     end
   end
 
-  # DELETE /schedule_rates/1
-  # DELETE /schedule_rates/1.json
-  def destroy
-    @schedule_rate = ScheduleRate.find(params[:id])
-    @schedule_rate.destroy
-    respond_to do |format|
-      format.html { redirect_to schedule_rates_url }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @schedule_rate = ScheduleRate.find(params[:id])
+  #   @schedule_rate.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to schedule_rates_url }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
 private
 
@@ -62,6 +58,7 @@ private
       :project,
       :schedule_rates,
       :schedule_rate,
+      :most_recent_schedule_rate,
       :return_to_path
 
   def project
@@ -80,6 +77,10 @@ private
     @schedule_rate ||= begin
       project.schedule_rates.employee(current_employee).build
     end
+  end
+
+  def most_recent_schedule_rate
+    @most_recent_schedule_rate ||= schedule_rates.last
   end
 
   def build_schedule_rate
