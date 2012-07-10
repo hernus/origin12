@@ -102,7 +102,7 @@ private
   def redirect_to_rosters_dates_or_schedule_rates
     project_id = params[:schedule_rates_project_id]
     if project_id.present?
-      flash[:return_to] = edit_roster_date_path(roster_date)
+      session[:return_to_path] = edit_roster_date_path(roster_date)
       redirect_to project_schedule_rates_path(project_id)
     else
       redirect_to roster_dates_path, notice: "Roster week was successfully #{params[:action]}d."

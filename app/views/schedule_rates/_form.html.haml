@@ -1,10 +1,41 @@
-= form_for @schedule_rate do |f|
-  -if @schedule_rate.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@schedule_rate.errors.count, "error")} prohibited this schedule_rate from being saved:"
-      %ul
-        - @schedule_rate.errors.full_messages.each do |msg|
-          %li= msg
-
+-if project.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(project.errors.count, "error")} prohibited this schedule_rate from being saved:"
+    %ul
+      - project.errors.full_messages.each do |msg|
+        %li= msg
+= form_for [ project, schedule_rate ] do |schedule_rate_form|
+  = hidden_field_tag :return_to_path, return_to_path
+  %table
+    %tr
+      %th.verified Verified
+      %th.schedule_rate Rate
+      %th.until Until
+    - schedule_rates.each do |schedule_rate|
+      %tr
+        %td.verified
+          = # schedule_rate.state :state
+          = check_box_tag 'Verified', true, {}, { disabled: true }
+        %td.schedule_date
+          = schedule_rate.contract_rate
+        %td.until
+          = schedule_rate.until
+    %tr
+      %td.verified
+        = check_box_tag 'Verified', true, {}, { disabled: true }
+      %td.schedule_rate
+        = schedule_rate_form.text_field :contract_rate
+      %td.until
+        Until
+        - if schedule_rate_form.object.until
+          %span.until_date
+            = schedule_rate_form.date_select :until, order: [ :day, :month, :year ]
+        - else
+          %span.until_end_of_project
+            end of project
+          %span.until_date{ class: 'hidden' }
+            = schedule_rate_form.date_select :until, order: [ :day, :month, :year ]
+  %hr
   .actions
-    = f.submit 'Save'
+    = schedule_rate_form.submit 'Add Schedule'
+    = link_to 'Back', return_to_path

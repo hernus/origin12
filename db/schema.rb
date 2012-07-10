@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20120708061016) do
 
   create_table "projects", :force => true do |t|
     t.string   "key"
+    t.integer  "company_id"
     t.integer  "customer_id"
     t.integer  "parent_id"
     t.integer  "manager_id"

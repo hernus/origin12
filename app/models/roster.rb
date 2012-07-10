@@ -22,24 +22,12 @@ class Roster < ActiveRecord::Base
   validates_presence_of :project_id
 
   def schedule_rate
-    # schedule_rates.
-    #     where('`until` >= ?', date.to_s(:db)).
-    #     order('`until` ASC').
-    #     limit(1).
-    #     first
+    project.schedule_rates.employee(employee).date(date).first
   end
 
   after_create :initialize_key
 
   after_initialize :initialize_new_record
-
-  # def dup
-  #   roster = super
-  #   roster_schedule_rates.each do |roster_schedule_rate|
-  #     roster.roster_schedule_rates << roster_schedule_rate.dup
-  #   end
-  #   roster
-  # end
 
 private
 

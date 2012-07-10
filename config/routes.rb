@@ -12,7 +12,7 @@ Origin12::Application.routes.draw do
 
   # To get a collection of projects from a selected customer_id
   resources :projects, only: [ :index ], constraints: { format: /json/ } do
-    resources :schedule_rates
+    resources :schedule_rates, only: [ :index, :new, :create ]
   end
 
   # resources :rosters, only: [ :index, :new, :create, :edit, :update ]

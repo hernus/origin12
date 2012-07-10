@@ -1,17 +1,31 @@
-%h1 Listing schedule_rates
-
-%table
-  %tr
-    %th
-    %th
-    %th
-
-  - @schedule_rates.each do |schedule_rate|
+.schedule_rates.index.grid_6.push_3
+  %h1 Rates Schedule
+  .employee_full_name.grid_3.alpha
+    %label Employee
+    %span #{current_employee.full_name}
+  .project_display_name.grid_3.omega
+    %div
+      %label Customer
+      %span #{project.customer.display_name}
+    %div
+      %label Project
+      %span #{project.display_name}
+  %table
     %tr
-      %td= link_to 'Show', schedule_rate
-      %td= link_to 'Edit', edit_schedule_rate_path(schedule_rate)
-      %td= link_to 'Destroy', schedule_rate, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Schedule rate', new_schedule_rate_path
+      %th.verified Verified
+      %th.schedule_date Rate
+      %th.until Until
+    - schedule_rates.each do |schedule_rate|
+      %tr
+        %td.verified
+          = # schedule_rate.state :state
+          = check_box_tag 'Verified', true, {}, { disabled: true }
+        %td.schedule_date
+          = schedule_rate.contract_rate
+        %td.until
+          = schedule_rate.until
+  .clearfix
+    .actions
+      = link_to 'Add Schedule', new_project_schedule_rate_path(project)
+      - if return_to_path
+        = link_to 'Back to Roster', return_to_path

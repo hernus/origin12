@@ -1,3 +1,84 @@
 // Place all the styles related to the ScheduleRates controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.schedule_rates  {
+  margin-top: 1em;
+  
+  h1 {
+    text-align: center;
+  }
+
+  hr {
+    margin: 1em 0;
+    border-top: 1px solid #CCC;
+    color: #FFF;
+    background-color: #FFF;
+    height: 1px;
+    width: 100%;      
+  }
+
+  &.index {
+    label {
+      width: 8em;
+      font-weight: bold;
+    }
+    .employee_full_name,
+    .project_display_name {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+    .project_display_name {
+      text-align: right;
+    }
+  }
+
+  table {
+    margin: 0 auto;
+    width: 100%;
+
+    th.verified,
+    td.verified {
+      text-align: center;
+      width: 6em;
+    }
+
+    th.until,
+    td.until {
+      text-align: right;
+    }
+
+    th {
+      background-color: #CCC;
+      padding: 8px 10px;
+      font-weight: bold;
+      text-align: left;
+      border-top: 1px solid #999;
+      border-bottom: 1px solid #999;
+    }
+    
+    td {
+      padding: 5px 10px;
+    }
+  }
+
+  .actions {
+    float: right;
+  }    
+
+  form {
+    .field {
+      display: block;
+      margin: 0.5em 0;
+      label {
+        display: inline-block;
+        width: 10em;
+      }
+    }
+    input[type='text'] {
+      border: 1px solid #CCC;
+      padding: 4px;
+    }
+  }
+}
+

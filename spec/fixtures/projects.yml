@@ -1,6 +1,7 @@
 woolworths_project_1:
   id: 1
   key: WP1
+  company_id: 1
   customer_id: 1
   company_id: 1
   manager_id: 1
@@ -11,6 +12,7 @@ woolworths_project_1:
 woolworths_project_2:
   id: 2
   key: WP2
+  company_id: 1
   customer_id: 1
   company_id: 1  
   manager_id: 1
@@ -21,6 +23,7 @@ woolworths_project_2:
 bhp_project_1:
   id: 3
   key: BHP1
+  company_id: 1
   customer_id: 2
   company_id: 1  
   manager_id: 1

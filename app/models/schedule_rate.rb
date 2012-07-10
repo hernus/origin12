@@ -12,4 +12,12 @@ class ScheduleRate < ActiveRecord::Base
   belongs_to :employee
   belongs_to :project
 
+  scope :employee, lambda { |employee_id|
+    where(:employee_id => employee_id)
+  }
+
+  scope :date, lambda { |date|
+    where([ "`until` >= ?", date ]).order('`until` ASC').limit(1)
+  }
+
 end
