@@ -1,0 +1,10 @@
+= form_for @schedule_rate do |f|
+  -if @schedule_rate.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@schedule_rate.errors.count, "error")} prohibited this schedule_rate from being saved:"
+      %ul
+        - @schedule_rate.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

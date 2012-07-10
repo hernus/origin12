@@ -28,7 +28,7 @@ class RosterDatesController < ApplicationController
     respond_to do |format|
       if roster_date.save
         roster_date.duplicate(*params[:wday])
-        format.html { redirect_to roster_dates_path, notice: 'Roster date was successfully created.' }
+        format.html { redirect_to_rosters_dates_or_schedule_rates }
         format.json { render json: roster_date, status: :created, location: roster_date }
       else
         format.html { render action: "new" }
@@ -41,7 +41,7 @@ class RosterDatesController < ApplicationController
     respond_to do |format|
       if roster_date.update_attributes(params[:roster_date])
         roster_date.duplicate(*params[:wday])
-        format.html { redirect_to roster_dates_path, notice: 'Roster date was successfully updated.' }
+        format.html { redirect_to_rosters_dates_or_schedule_rates }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -95,6 +95,18 @@ private
 
   def duplicate_date
     @duplicate_date ||= Date.parse(params[:duplicate_date])
+  end
+
+  ###
+
+  def redirect_to_rosters_dates_or_schedule_rates
+    project_id = params[:schedule_rates_project_id]
+    if project_id.present?
+      flash[:return_to] = edit_roster_date_path(roster_date)
+      redirect_to project_schedule_rates_path(project_id)
+    else
+      redirect_to roster_dates_path, notice: "Roster week was successfully #{params[:action]}d."
+    end
   end
 
   # def show

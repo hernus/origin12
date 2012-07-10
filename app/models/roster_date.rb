@@ -1,7 +1,7 @@
 class RosterDate < ActiveRecord::Base
 
   MAXIMUM_SHIFTS = 3
-  ETERNITY_DATE = Date.parse('9999-12-31')
+  ETERNITY_DATE  = Date.parse('9999-12-31')
 
   attr_accessible \
     :date,
@@ -36,12 +36,6 @@ class RosterDate < ActiveRecord::Base
   def build_default_rosters
     (MAXIMUM_SHIFTS - rosters.length).times do |shift|
       rosters.build shift: shift
-    end
-    rosters.each do |roster|
-      # Always include one empty schedule rate
-      # if roster.schedule_rates.empty?
-        roster.schedule_rates.build
-      # end
     end
   end
 

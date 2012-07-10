@@ -1,0 +1,17 @@
+%h1 Listing schedule_rates
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @schedule_rates.each do |schedule_rate|
+    %tr
+      %td= link_to 'Show', schedule_rate
+      %td= link_to 'Edit', edit_schedule_rate_path(schedule_rate)
+      %td= link_to 'Destroy', schedule_rate, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Schedule rate', new_schedule_rate_path

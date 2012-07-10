@@ -130,11 +130,12 @@ ActiveRecord::Schema.define(:version => 20120708061016) do
   add_index "rosters", ["roster_date_id"], :name => "index_rosters_on_roster_date_id"
 
   create_table "schedule_rates", :force => true do |t|
-    t.integer  "customer_id"
     t.integer  "company_id"
+    t.integer  "customer_id"
+    t.integer  "employee_id"
     t.integer  "project_id"
-    t.string   "state"
     t.float    "contract_rate"
+    t.string   "state"
     t.date     "until"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false

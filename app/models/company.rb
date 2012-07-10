@@ -5,5 +5,6 @@ class Company < ActiveRecord::Base
       :name
 
   has_many :customers
+  has_many :projects
 
 end

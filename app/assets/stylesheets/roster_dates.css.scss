@@ -81,6 +81,9 @@
 				height: 2em;
 				vertical-align: middle;
 			}
+			+ hr {
+				border-top: 1px dotted #CCC;
+			}
 		}
 		.employee {
 			label {
@@ -143,6 +146,9 @@
 			input {
 				width: 18em;
 			}
+		}
+		.schedule_rate {
+			text-align: right;
 		}
 		.schedule_rates {
 			width: 90%;

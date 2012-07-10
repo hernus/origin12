@@ -11,7 +11,9 @@ Origin12::Application.routes.draw do
   end
 
   # To get a collection of projects from a selected customer_id
-  resources :projects, only: [ :index ], constraints: { format: /json/ }
+  resources :projects, only: [ :index ], constraints: { format: /json/ } do
+    resources :schedule_rates
+  end
 
   # resources :rosters, only: [ :index, :new, :create, :edit, :update ]
   resources :roster_dates, :controller => 'roster_dates'
