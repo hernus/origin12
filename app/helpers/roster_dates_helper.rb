@@ -50,7 +50,12 @@ module RosterDatesHelper
 
   def link_to_calendar_date(date, url)
     label = date.day.to_s
-    label += " #{date.strftime('%b')}" if date === date.beginning_of_month
+    if date == date.beginning_of_month
+      label += " #{date.strftime('%b')}"
+    end
+    if (date.wday == 0) && (date - 7.days).month != date.month
+      label += " #{date.strftime('%b')}"
+    end
     link_to label, url, class: 'roster_date_day_number'
   end
 
