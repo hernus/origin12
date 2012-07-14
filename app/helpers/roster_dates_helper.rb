@@ -34,8 +34,18 @@ module RosterDatesHelper
     if roster.customer.present? || idx == 0
       {}
     else
-      { style: 'display: none;' }
+      { style: 'display:none;' }
     end
+  end
+
+  def add_shift_button_style(roster_idx, rosters_count, rosters)
+    styling = { type: 'button', class: 'add_shift' }
+    css_class = {}
+    if (roster_idx + 1 < rosters_count) &&
+        rosters[roster_idx + 1].customer.present?
+      css_class = { style: 'display:none;' }
+    end
+    styling.merge(css_class)
   end
 
   def link_to_calendar_date(date, url)

@@ -16,7 +16,9 @@
       = f.label :locked, 'Copy protect'
   %hr
   .rosters.clearfix
-    - roster_date.rosters.each_with_index do |roster, idx|
+    - rosters = roster_date.rosters
+    - rosters_count = rosters.length
+    - rosters.each_with_index do |roster, idx|
       .roster.clearfix{ reveal_roster(roster, idx) }
         %table{ cellpadding: '0' }
           = f.fields_for :rosters, roster do |roster_form|
@@ -57,7 +59,8 @@
                   = roster_form.text_field :description
               %td
                 .actions
-                  = button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
+                  = # button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
+                  = button_tag 'Add Shift', add_shift_button_style(idx, rosters_count, rosters)
                   - unless roster_form.object.new_record?
                     = roster_form.check_box :_destroy
                     = roster_form.label :_destroy, 'Delete Shift'
