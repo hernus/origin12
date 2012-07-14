@@ -8,10 +8,19 @@ class EmployeesController < ApplicationController
 
   before_filter :build_employee_rates, only: [ :new, :edit ]
 
+  before_filter :set_current_employee, only: [ :switch ]
+
   def index
     respond_to do |format|
       format.html 
       format.json { render json: employees }
+    end
+  end
+
+  def switch
+    respond_to do |format|
+      format.html { redirect_to request.referer }
+      format.json { render json: company }
     end
   end
 
@@ -78,5 +87,9 @@ private
   def build_employee_rates
     employee.employee_rates.build
   end
+
+  def set_current_employee
+    self.current_employee = employee
+  end  
 
 end

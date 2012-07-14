@@ -14,13 +14,19 @@ body {
       overflow: hidden;
     }
 
-    ul.company_select,
+    ul.switches,
     ul.nav {
       position: relative;
       list-style: none;
       top: 15px;
     }
-      
+
+    ul.switches {
+      li {
+        float: left;
+      }
+    }
+
     .company_name {
       color: white;
     }

@@ -10,16 +10,21 @@
       .container_12
         .grid_2
           = image_tag 'origin-45px.png', :alt => 'Origin12'
-        %ul.company_select.grid_1
-          %li
-            - employee_companies = current_employee.companies
-            - if employee_companies.length > 1
+        %ul.switches.grid_4
+          %li.company_switch
+            - companies = current_employee.companies
+            - if companies.length > 1
               = form_tag switch_companies_path, method: :get do |f|
-                = select_tag :id, options_from_collection_for_select(employee_companies, "id", "display_name", current_company[:id]), id: 'company_switch'
+                = select_tag :id, options_from_collection_for_select(companies, "id", "display_name", current_company[:id]), id: 'company_switch'
             - else
               %span.company_name
                 #{employee_companies.first.display_name}
-        %ul.nav.grid_5.push_4
+          - employees = current_company.employees
+          - if employees.length > 1
+            %li.employee_switch
+              = form_tag switch_employees_path, method: :get do |f|
+                = select_tag :id, options_from_collection_for_select(employees, "id", "full_name", current_employee[:id]), id: 'employee_switch'
+        %ul.nav.grid_5.push_1
           %li= link_to 'Roster', roster_path
           %li= link_to 'Timesheet', '#'
           %li= link_to 'Scorecard', '#'

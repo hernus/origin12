@@ -10,7 +10,9 @@ Origin12::Application.routes.draw do
 
   resources :teams, except: [ :show ]
   
-  resources :employees, except: [ :show ]
+  resources :employees, except: [ :show ] do
+    collection { get :switch }
+  end
 
   # AJAX get a collection of projects for selected customer
 
