@@ -1,10 +1,16 @@
-= form_for [ customer, project ] do |f|
+= form_for project do |f|
   -if project.errors.any?
     #error_explanation
       %h2= "#{pluralize(project.errors.count, "error")} prohibited this project from being saved:"
       %ul
         - project.errors.full_messages.each do |msg|
           %li= msg
+  - if customer?
+    = hidden_field_tag :customer_id, customer[:id]
+  - else
+    .field
+      %label Customer
+      = select_tag :customer_id, options_from_collection_for_select(customers, "id", "display_name")
   .field
     = f.label :code
     = f.text_field :short_name
@@ -17,6 +23,7 @@
   .field
     = f.label :manager_id, 'Manager'
     = f.collection_select :manager_id, managers, :id, :full_name
+  %hr
   .actions
     = f.submit 'Save'
-    = link_to 'Back', customer_projects_path(customer)
+    = link_to 'Back', customer? ? customer_projects_path(customer) : projects_path

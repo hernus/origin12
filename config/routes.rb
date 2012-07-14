@@ -1,21 +1,20 @@
 Origin12::Application.routes.draw do
 
-  resources :companies, except: [ :show, :destroy ] do
+  resources :companies, only: [ :index, :new, :create, :edit, :update ] do
     collection { get :switch }
-    # resources :projects, only: [ :index ]
   end
 
-  resources :customers, except: [ :show, :destroy ] do
-    resources :projects, except: [ :show ]
+  resources :customers, only: [ :index, :new, :create, :edit, :update ] do
+    resources :projects, only: [ :index, :new, :edit ]
   end
 
   resources :teams, except: [ :show ]
   
   resources :employees, except: [ :show ]
 
-  # To get a collection of projects for a customer
+  # AJAX get a collection of projects for selected customer
 
-  resources :projects, only: [ :index ], constraints: { format: /json/ } do
+  resources :projects, only: [ :index, :new, :create, :update ] do
     resources :schedule_rates, only: [ :index, :new, :create ]
   end
 

@@ -32,7 +32,9 @@ class Roster < ActiveRecord::Base
 private
 
   def initialize_key
-    update_attribute(:key, self.id)
+    if key.nil?
+      update_attribute(:key, self.id)
+    end
   end
 
   def initialize_new_record
