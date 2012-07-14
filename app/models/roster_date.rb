@@ -9,7 +9,7 @@ class RosterDate < ActiveRecord::Base
     :locked,
     :rosters_attributes
 
-  validates_uniqueness_of :date, scope: :employee_id
+  validates_uniqueness_of :date, scope: [ :company_id, :employee_id ]
 
   belongs_to :employee
   belongs_to :company
@@ -34,6 +34,17 @@ class RosterDate < ActiveRecord::Base
       allow_destroy: true,
       reject_if: proc { |attrs| attrs['customer_id'].blank? || attrs['project_id'].blank? }
 
+  alias_method :rosters_attributes_without_company=, :rosters_attributes=
+
+  def rosters_attributes=(attrs)
+    self.rosters_attributes_without_company = attrs
+    rosters.each do |roster|
+      if roster.new_record?
+        roster.company = company
+      end
+    end
+  end
+
   def build_default_rosters
     (MAXIMUM_SHIFTS - rosters.length).times do |shift|
       rosters.build shift: shift
@@ -44,7 +55,7 @@ class RosterDate < ActiveRecord::Base
     transaction do
       date = Date.parse(params[:date])
       params[:weeks] &&= params[:weeks].to_i
-      self.week(date).wdays(params[:wday]).employee(employee[:id]).each do |roster_date|
+      self.week(date).wdays(params[:wday]).employee(employee).each do |roster_date|
         roster_date.duplicate(*future_dates(roster_date, params[:weeks]))
       end
     end

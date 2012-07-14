@@ -120,8 +120,6 @@ ActiveRecord::Schema.define(:version => 20120714100134) do
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "roster_dates", ["employee_id", "date"], :name => "index_roster_dates_on_employee_id_and_date"
-
   create_table "roster_schedule_rates", :force => true do |t|
     t.integer  "roster_id",        :null => false
     t.integer  "schedule_rate_id", :null => false
