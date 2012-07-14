@@ -1,8 +1,12 @@
 class EmployeesController < ApplicationController
 
   helper_method \
-    :employees,
-    :employee
+      :employees,
+      :employee
+
+  before_filter :new_employee, only: [ :new, :create ]
+
+  before_filter :build_employee_rates, only: [ :new, :edit ]
 
   def index
     respond_to do |format|
@@ -19,7 +23,6 @@ class EmployeesController < ApplicationController
 # end
  
   def new
-    employee.employee_rates.build
     respond_to do |format|
       format.html 
       format.json { render json: employee }
@@ -36,10 +39,6 @@ class EmployeesController < ApplicationController
         format.json { render json: employee.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def edit
-    employee.employee_rates.build
   end
 
   def update
@@ -65,11 +64,19 @@ class EmployeesController < ApplicationController
 private
 
   def employees
-    @employees ||= Employee.all
+    @employees ||= current_company.employees
   end
 
   def employee
-    @employee ||= params[:id] ? Employee.find(params[:id]) : Employee.new(params[:employee])
+    @employee ||= employees.find(params[:id])
+  end
+
+  def new_employee
+    @employee = employees.build(params[:employee])    
+  end
+
+  def build_employee_rates
+    employee.employee_rates.build
   end
 
 end

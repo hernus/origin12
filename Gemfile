@@ -48,3 +48,5 @@ gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'acts_as_tree'

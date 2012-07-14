@@ -1,5 +1,3 @@
-%h1 New company
-
-= render 'form'
-
-= link_to 'Back', companies_path
+.companies.grid_6.push_3
+  %h1 New Company for #{current_company.display_name}
+  = render 'form'

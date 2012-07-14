@@ -1,17 +1,22 @@
-.projects
-  %h1 Projects
+.projects.index
+  %h1
+    - if customer? 
+      #{customer.display_name}
+    Projects
   .grid_8.push_2
     %table
       %tr
-        %th Customer
-        %th Project ID
+        %th
+          = customer? ? '&nbsp;'.html_safe : 'Customer'
+        %th Project
         %th Name
         %th Status
         %th Manager
         %th &nbsp;
       - projects.each do |project|
         %tr
-          %td= customer.display_name
+          %td
+            = customer? ? '&nbsp;'.html_safe : customer.display_name
           %td= project.short_name
           %td= project.name
           %td Active
@@ -19,11 +24,13 @@
             - project_manager = project.manager
             = project_manager ? project_manager.full_name : '&nbsp;'.html_safe
           %td
-            =# link_to 'Show', project
-            = link_to 'Edit', edit_customer_project_path(customer, project)
-            =# link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
+            .actions
+              = # link_to 'Show', project
+              - if customer?
+                = link_to 'Edit', edit_customer_project_path(customer, project)
+              = # link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
       %tr
-        %td{ colspan: '5' }
-          &nbsp;
-        %td
-          = link_to 'New', new_customer_project_path(customer)
+        %td{ colspan: '6' }
+          .actions
+            - if customer?
+              = link_to 'New Project', new_customer_project_path(customer)

@@ -1,0 +1,11 @@
+team1:
+  id: 1
+  key: team1
+  company_id: 1
+  description: "Team 1"
+
+team2:
+  id: 2
+  key: team2
+  company_id: 1
+  description: "Team 2"

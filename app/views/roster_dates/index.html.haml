@@ -8,7 +8,7 @@
     =# link_to 'Next 4 Weeks >', month: (current_date.end_of_month + 1).strftime('%Y-%m')
     &nbsp;
   .calendar
-    = calendar_last_date roster_dates
+    = # calendar_last_date roster_dates
     = # calendar_for roster_dates, last: calendar_last_date(roster_dates) do |calendar|
     = calendar_for roster_dates do |calendar|
       = calendar.head 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'

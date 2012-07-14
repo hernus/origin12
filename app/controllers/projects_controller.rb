@@ -2,8 +2,13 @@ class ProjectsController < ApplicationController
 
   helper_method \
     :customer,
+    :customer?,
     :projects,
     :project
+
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to customers_path
+  end
 
   def index
     respond_to do |format|
@@ -77,15 +82,29 @@ class ProjectsController < ApplicationController
 private
 
   def customer
-    # TODO current_company.customers.find(params[:customer_id])
-    @customer ||= Customer.find(params[:customer_id])
+    @customer ||= begin
+      if params[:customer_id]
+        current_company.customers.find(params[:customer_id])
+      end
+    end
+  end
+
+  def customer?
+    customer.present?
   end
 
   def projects
-    @projects ||= customer.projects.order('`key` ASC')
+    @projects ||= begin
+      if customer?
+        customer.projects.order('`key` ASC')
+      else
+        current_company.projects
+      end
+    end
   end
 
   def project
     @project ||= params[:id] ? projects.find(params[:id]) : projects.build(params[:project])
   end
+
 end

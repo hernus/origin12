@@ -15,5 +15,3 @@ hernus:
   last_name: Carelsen
   company_id: 1
   started_at: <%= Date.parse('2011-06-01') %>
-
-

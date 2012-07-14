@@ -1,7 +1,7 @@
-.employees
-  %h1 Employees
+.employees.index
+  %h1 #{current_company.display_name} Employees
   .grid_8.push_2.clearfix
-    %table.index
+    %table
       %tr
         %th Number
         %th Full Name
@@ -13,11 +13,11 @@
           %td= employee.full_name
           %td= employee.started_at.to_s(:long)
           %td
-            =# link_to 'Show', employee
-            = link_to 'Edit', edit_employee_path(employee)
-            =# link_to 'Destroy', employee, :confirm => 'Are you sure?', :method => :delete
+            .actions
+              = # link_to 'Show', employee
+              = link_to 'Edit', edit_employee_path(employee)
+              = # link_to 'Destroy', employee, :confirm => 'Are you sure?', :method => :delete
       %tr
-        %td{ colspan: '3' }
-        %td
+        %td{ colspan: '4' }
           .actions
-            = link_to 'New', new_employee_path
+            = link_to 'New Employee', new_employee_path

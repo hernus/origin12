@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(:version => 20120708061016) do
   create_table "companies", :force => true do |t|
     t.string   "key"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "parent_id"
+    t.boolean  "internal",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "customers", :force => true do |t|
@@ -43,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20120708061016) do
 
   create_table "employee_rates", :force => true do |t|
     t.integer  "employee_id"
+    t.integer  "company_id"
     t.integer  "team_id"
     t.float    "cost_rate"
     t.float    "card_rate"
@@ -144,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20120708061016) do
 
   create_table "teams", :force => true do |t|
     t.string   "key"
+    t.integer  "company_id"
     t.integer  "parent_id"
     t.integer  "manager_id"
     t.string   "description"

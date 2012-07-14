@@ -1,23 +1,20 @@
-%h1 Listing customers
-
-%table
-  %tr
-    %th Key
-    %th Name
-    %th Company
-    %th
-    %th
-    %th
-
-  - @customers.each do |customer|
-    %tr
-      %td= customer.key
-      %td= customer.name
-      %td= customer.company_id
-      %td= link_to 'Show', customer
-      %td= link_to 'Edit', edit_customer_path(customer)
-      %td= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Customer', new_customer_path
+.customers.index
+  %h1 #{current_company.display_name} Customers
+  .grid_8.push_2.clearfix
+    %table
+      %tr
+        %th Key
+        %th Name
+        %th &nbsp;
+      - customers.each do |customer|
+        %tr{ color_cycle }
+          %td= customer.key
+          %td= customer.name
+          %td.actions
+            = link_to 'Projects', customer_projects_path(customer)
+            = link_to 'Edit', edit_company_path(customer)
+            = # link_to 'Destroy', company, :confirm => 'Are you sure?', :method => :delete
+      %tr
+        %td{ colspan: '3' }
+          .actions
+            = link_to 'New Customer', new_customer_path

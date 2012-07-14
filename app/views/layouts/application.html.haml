@@ -8,8 +8,17 @@
   %body
     .header
       .container_12
-        .grid_3
+        .grid_2
           = image_tag 'origin-45px.png', :alt => 'Origin12'
+        %ul.company_select.grid_1
+          %li
+            - employee_companies = current_employee.companies
+            - if employee_companies.length > 1
+              = form_tag switch_companies_path, method: :get do |f|
+                = select_tag :id, options_from_collection_for_select(employee_companies, "id", "display_name", current_company[:id]), id: 'company_switch'
+            - else
+              %span.company_name
+                #{employee_companies.first.display_name}
         %ul.nav.grid_5.push_4
           %li= link_to 'Roster', roster_path
           %li= link_to 'Timesheet', '#'
@@ -17,11 +26,13 @@
           %li
             %a{:href => "#"} Admin
             %ul
-              %li= link_to 'Customers', '#'
               %li= link_to 'Companies', companies_path
+              %li= link_to 'Customers', customers_path 
+              - if false
+                %li=# link_to 'Projects', company_projects_path(current_company)
               %li= link_to 'Employees', employees_path
               %li= link_to 'Teams', teams_path
-          %li= link_to 'John Citizen', '#'
+          %li= link_to 'Hernus Carelsen', '#'
     :javascript
       $(function() {
         $('.nav').droppy({trigger: 'click', speed: 50});

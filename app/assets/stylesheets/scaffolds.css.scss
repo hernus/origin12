@@ -1,35 +1,112 @@
 body {
   background-color: #fff;
   color: #333;
-  // font-family: verdana, arial, helvetica, sans-serif;
-  // font-size: 13px;
-  // line-height: 18px;
+  font: 13px/1.5 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
 }
 
-// p, ol, ul, td {
-//   font-family: verdana, arial, helvetica, sans-serif;
-//   font-size: 13px;
-//   line-height: 18px; }
-
-pre {
+pre,
+code {
+  font-family: 'DejaVu Sans Mono', Menlo, Consolas, monospace;
   background-color: #eee;
   padding: 10px;
-  font-size: 11px; }
+  font-size: 11px;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.5em 0;
+  text-align: center;
+}
 
 a {
-  color: #000;
-  &:visited {
-    color: #666; }
+  color: #333;
+  text-decoration: none;
+  &:visited,
+  &:active {
+    color: #333;
+  }
   &:hover {
-    color: #fff;
-    background-color: #000; } }
+    color: #333;
+    text-decoration: underline;
+  }
+}
 
-div {
-  &.field, &.actions {
-    margin-bottom: 10px; } }
+hr {
+  margin: 1em 0;
+  border-top: 1px solid #CCC;
+  color: #FFF;
+  background-color: #FFF;
+  height: 1px;
+  width: 100%;
+  clear: both;
+  height: 0;
+}
+
+/* Resources */
+
+.index {
+  table {
+    margin: 0 auto;
+    width: 100%;
+
+    tr.alt {
+      background-color: #F0F0F0;
+    }
+
+    tr:last-child {
+      border-top: 1px solid #999;
+      td {
+        padding-top: 0.5em;
+      }
+    }
+
+    th {
+      background-color: #CCC;
+      padding: 8px 10px;
+      font-weight: bold;
+      text-align: left;
+      border-top: 1px solid #999;
+      border-bottom: 1px solid #999;
+    }
+
+    td {
+      padding: 5px 10px;
+    }
+
+    .actions {
+      text-align: right;
+    }
+  }
+}
+
+form {
+  .field {
+    display: block;
+    margin: 0.5em 0;
+    label {
+      display: inline-block;
+      width: 6em;
+      font-weight: bold;
+    }
+  }
+
+  input[type='text'] {
+    border: 1px solid #CCC;
+    padding: 4px;
+  }
+
+  .actions {
+    text-align: right;
+  }
+}  
+
+/**
+  Field with errors
+**/
 
 #notice {
-  color: green; }
+  color: green;
+}
 
 .field_with_errors {
   display: inline;

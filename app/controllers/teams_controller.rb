@@ -4,6 +4,8 @@ class TeamsController < ApplicationController
     :teams,
     :team
 
+  before_filter :new_team, only: [ :new, :create ]
+  
   def index
     respond_to do |format|
       format.html
@@ -60,11 +62,15 @@ class TeamsController < ApplicationController
 private
 
   def teams
-    @teams ||= Team.all
+    @teams ||= current_company.teams
   end
 
   def team
-    @team ||= params[:id] ? Team.find(params[:id]) : Team.new(params[:team])
+    @team ||= teams.find(params[:id])
+  end
+
+  def new_team
+    @team = current_company.teams.build(params[:team])
   end
 
 end

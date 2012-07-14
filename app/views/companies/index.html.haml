@@ -1,20 +1,25 @@
-.companies
+.companies.index
   %h1 Companies
   .grid_8.push_2.clearfix
-    %table.index
+    %table
       %tr
         %th Key
         %th Name
+        %th Parent
         %th &nbsp;
       - companies.each do |company|
         %tr{ color_cycle }
           %td= company.key
-          %td= company.name
+          %td= company.display_name
           %td
+            - if company_parent = company.parent
+              #{company.parent.display_name}
+            - else
+              &nbsp;
+          %td.actions
             = link_to 'Edit', edit_company_path(company)
-            =# link_to 'Destroy', company, :confirm => 'Are you sure?', :method => :delete
+            = # link_to 'Destroy', company, :confirm => 'Are you sure?', :method => :delete
       %tr
-        %td{ colspan: '2' }
-        %td
+        %td{ colspan: '4' }
           .actions
-            = link_to 'New', new_company_path
+            = link_to 'New Company', new_company_path

@@ -1,7 +1,7 @@
-.teams
-  %h1 Teams
+.teams.index
+  %h1 #{current_company.display_name} Teams
   .grid_8.push_2.clearfix
-    %table.index
+    %table
       %tr
         %th Number
         %th Manager
@@ -17,11 +17,11 @@
           %td= team.description
           %td= team.state
           %td
-            =# link_to 'Show', team
-            = link_to 'Edit', edit_team_path(team)
-            =# link_to 'Destroy', team, :confirm => 'Are you sure?', :method => :delete
+            .actions
+              = # link_to 'Show', team
+              = link_to 'Edit', edit_team_path(team)
+              = # link_to 'Destroy', team, :confirm => 'Are you sure?', :method => :delete
       %tr
-        %td{ colspan: '4' }
-        %td
+        %td{ colspan: '5' }
           .actions
-            = link_to 'New', new_team_path
+            = link_to 'New Team', new_team_path

@@ -10,6 +10,7 @@ class Team < ActiveRecord::Base
 
   alias_attribute :name, :description
 
+  belongs_to :company
   belongs_to :manager, class_name: 'Employee'
 
   has_one  :parent,   class_name: 'Team'

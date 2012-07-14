@@ -10,12 +10,14 @@ class Employee < ActiveRecord::Base
     :schedule_rates_attributes
 
   belongs_to :user
+  belongs_to :company
 
   has_many :employee_rates
   has_many :schedule_rates
   has_many :roster_dates
 
   accepts_nested_attributes_for :employee_rates, reject_if: :all_blank
+
   accepts_nested_attributes_for :schedule_rates, reject_if: :all_blank
 
   def full_name
@@ -24,6 +26,19 @@ class Employee < ActiveRecord::Base
 
   def destroy
     touch(:deleted_at)
+  end
+
+  def companies
+    # TODO: Employee should only see their company and its children
+    Company.order(:name)
+  end
+
+  def authorized?(klass, *operations)
+    true
+  end
+
+  def role?(*roles)
+    true
   end
 
 end
