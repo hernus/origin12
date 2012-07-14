@@ -2,6 +2,10 @@ class ScheduleRatesController < ApplicationController
 
   before_filter :build_schedule_rate, only: [ :create ]
 
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to roster_path
+  end
+
   def index
     respond_to do |format|
       format.html

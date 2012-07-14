@@ -6,6 +6,10 @@ class TeamsController < ApplicationController
     :managers
 
   before_filter :new_team, only: [ :new, :create ]
+
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to teams_path
+  end
   
   def index
     respond_to do |format|

@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
       :managers
 
   rescue_from ActiveRecord::RecordNotFound do
-    redirect_to customers_path
+    redirect_to projects_path
   end
 
   before_filter :new_project, only: [ :new, :create ]

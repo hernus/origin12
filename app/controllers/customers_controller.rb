@@ -6,6 +6,10 @@ class CustomersController < ApplicationController
 
   before_filter :new_customer, only: [ :new, :create ]
 
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to customers_path
+  end
+
   def index
     respond_to do |format|
       format.html

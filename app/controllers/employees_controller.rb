@@ -10,6 +10,10 @@ class EmployeesController < ApplicationController
 
   before_filter :set_current_employee, only: [ :switch ]
 
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to employees_path
+  end
+
   def index
     respond_to do |format|
       format.html 
