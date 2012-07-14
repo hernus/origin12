@@ -9,6 +9,18 @@
 	h1 {
 		text-align: center;
 	}
+
+	.nav {
+		text-align: right;
+	}
+
+	.nav.calendar_from {
+		margin-bottom: 0.5em;
+	}
+
+	.nav.calendar_until {
+		margin-top: 0.5em;
+	}
 	
 	.calendar {
 		table {

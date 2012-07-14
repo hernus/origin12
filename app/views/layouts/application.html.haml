@@ -5,7 +5,7 @@
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body
+  %body.application
     .header
       .container_12
         .grid_2
@@ -31,7 +31,6 @@
               %li= link_to 'Projects', projects_path
               %li= link_to 'Employees', employees_path
               %li= link_to 'Teams', teams_path
-
           - employees = current_company.employees
           - if employees.length > 1
             %li.employee_switch
@@ -39,10 +38,11 @@
                 = select_tag :id, options_from_collection_for_select(employees, "id", "full_name", current_employee[:id]), id: 'employee_switch'
           - else
             = link_to current_employee.full_name, '#' 
-    :javascript
-      $(function() {
-        $('.nav').droppy({trigger: 'click', speed: 50});
-      });
     .container_12
       = yield
     .footer
+      About | Contact Us | Help
+    :javascript
+      $(function() {
+        $('body > .header .nav').droppy({trigger: 'click', speed: 50});
+      });

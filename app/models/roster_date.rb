@@ -26,9 +26,9 @@ class RosterDate < ActiveRecord::Base
 
   scope :employee, lambda { |employee| where(employee_id: employee[:id]) }
 
-  scope :unlocked, where(locked: false)
-
   scope :company, lambda { |company| where(company_id: company[:id]) }
+
+  scope :unlocked, where(locked: false)
 
   accepts_nested_attributes_for :rosters,
       allow_destroy: true,
@@ -51,12 +51,12 @@ class RosterDate < ActiveRecord::Base
     end
   end
 
-  def self.duplicate(params, employee)
+  def self.duplicate(employee, company, opts)
     transaction do
-      date = Date.parse(params[:date])
-      params[:weeks] &&= params[:weeks].to_i
-      self.week(date).wdays(params[:wday]).employee(employee).each do |roster_date|
-        roster_date.duplicate(*future_dates(roster_date, params[:weeks]))
+      date  = Date.parse(opts[:date])
+      weeks = opts[:weeks] ? opts[:weeks].to_i : 0
+      self.week(date).wdays(opts[:wday]).employee(employee).company(company).each do |roster_date|
+        roster_date.duplicate *future_dates(roster_date, weeks)
       end
     end
   end
@@ -65,7 +65,7 @@ class RosterDate < ActiveRecord::Base
   # either as strings (yyyy-mm-dd) or date objects.
   def duplicate(*dates)
     map_date_strings_to_dates! dates
-    RosterDate.destroy_all(date: dates, employee_id: self.employee_id, locked: false)
+    RosterDate.destroy_all date: dates, employee_id: employee_id, company_id: company_id, locked: false
     dates.each do |date|
       roster_date = self.dup
       roster_date.date = date

@@ -1,4 +1,5 @@
-body {
+body.application {
+
   > .header {
   	position: relative;
     height: 45px;
@@ -36,5 +37,12 @@ body {
     	text-decoration: underline;
     	background-color: inherit;
     }
+  }
+
+  > .footer {
+    margin-top: 2em;
+    padding-bottom: 2em;
+    text-align: center;
+    color: #CCC;
   }
 }

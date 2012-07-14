@@ -38,12 +38,12 @@ module RosterDatesHelper
     end
   end
 
-  def calendar_last_date(roster_dates)
-    if roster_date = roster_dates.last
-      roster_date.date
-    else
-      Date.today + 4.weeks
-    end
+  def calendar_from
+    params[:from] ? Date.parse(params[:from]) : (Date.today - 1.week)
+  end
+
+  def calendar_until
+    params[:until] ? Date.parse(params[:until]) : (calendar_from + 3.weeks)
   end
 
 end
