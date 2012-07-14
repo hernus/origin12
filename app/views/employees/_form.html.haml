@@ -25,31 +25,42 @@
     = f.date_select :terminated_at, { order: [ :day, :month, :year ], prompt: true }
   %hr
   %table.employee_rates{ colspacing: '0' }
-    %tr
-      %th Cost Rate
-      %th Card Rate
-      %th Internal Rate
-      %th Team
-      %th End Date
-    = f.fields_for :employee_rates do |employee_rate|
+    %thead
       %tr
-        %td.cost_rate
-          = employee_rate.text_field :cost_rate
-        %td.card_rate
-          = employee_rate.text_field :card_rate
-        %td.internal_rate
-          = employee_rate.text_field :internal_rate
-        %td.team
-          = employee_rate.collection_select :team_id, current_company.teams, 'id', 'display_name'
-        %td.until
-          - if employee_rate.object.until
-            = employee_rate.date_select :until, order: [ :day, :month, :year ]
-          - else
-            = employee_rate.date_select :until, prompt: true, start_year: Time.now.year - 1, order: [ :day, :month, :year ]
-    %tr
-      %td{ colspan: '5' }
-        .actions
-          = link_to 'Add Assignment', '#', class: 'add_assignment'
+        %th Cost Rate
+        %th Card Rate
+        %th Internal Rate
+        %th Team
+        %th End Date
+        %th &nbsp;
+    %tbody
+      = f.fields_for :employee_rates do |employee_rate|
+        %tr
+          %td.cost_rate
+            = employee_rate.text_field :cost_rate
+          %td.card_rate
+            = employee_rate.text_field :card_rate
+          %td.internal_rate
+            = employee_rate.text_field :internal_rate
+          %td.team
+            = employee_rate.collection_select :team_id, current_company.teams, 'id', 'display_name', prompt: true
+          %td.until
+            - if employee_rate.object.until
+              = employee_rate.date_select :until, order: [ :day, :month, :year ]              
+            - else
+              = employee_rate.date_select :until, prompt: true, start_year: Time.now.year - 1, order: [ :day, :month, :year ]
+          %td.delete
+            - if employee_rate.object.new_record?
+              = employee_rate.check_box :_destroy, disabled: true
+              = employee_rate.label :_destroy, 'Delete'
+            - else
+              = employee_rate.check_box :_destroy
+              = employee_rate.label :_destroy, 'Delete'
+    %tfoot
+      %tr
+        %td{ colspan: '6' }
+          .actions
+            = button_tag 'Add Assignment', class: 'add_assignment'
   %hr
   .actions    
     = f.submit 'Save'

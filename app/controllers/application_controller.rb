@@ -42,13 +42,17 @@ class ApplicationController < ActionController::Base
 protected
 
   def current_company=(company)
-    session[:current_company_id] = company[:id]
-    self.current_employee = company.employees.first
-    @current_company = company
+    if company
+      session[:current_company_id] = company[:id]
+      self.current_employee = company.employees.first
+      @current_company = company
+    else
+      @current_company = session[:current_company_id] = self.current_employee = nil
+    end
   end
 
   def current_employee=(employee)
-    session[:current_employee_id] = employee[:id]
+    session[:current_employee_id] = employee ? employee[:id] : nil
     @current_employee = employee
   end
 
