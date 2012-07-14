@@ -9,15 +9,19 @@
     = f.label :key, 'Number'
     = f.text_field :key
   .field
-    = f.label :manager_id
-    = f.collection_select :manager_id, managers, :id, :full_name, { prompt: true }
-  .field
     = f.label :description, 'Team Name'
     = f.text_field :description
   .field
+    = f.label :manager_id
+    - if managers.length > 0
+      = f.collection_select :manager_id, managers, :id, :full_name, { prompt: true }
+    - else
+      No managers in company
+  .field
     = f.label :state, 'Status'
-    =# f.text_field :state
+    = # f.text_field :state
     Active
+  %hr
   .actions
     = f.submit 'Save'
     = link_to 'Back', teams_path

@@ -10,20 +10,15 @@
       .container_12
         .grid_2
           = image_tag 'origin-45px.png', :alt => 'Origin12'
-        %ul.switches.grid_4
+        %ul.switch.grid_4
           %li.company_switch
             - companies = current_employee.companies
             - if companies.length > 1
               = form_tag switch_companies_path, method: :get do |f|
                 = select_tag :id, options_from_collection_for_select(companies, "id", "display_name", current_company[:id]), id: 'company_switch'
-            - else
+            - elsif company = companies.first
               %span.company_name
-                #{employee_companies.first.display_name}
-          - employees = current_company.employees
-          - if employees.length > 1
-            %li.employee_switch
-              = form_tag switch_employees_path, method: :get do |f|
-                = select_tag :id, options_from_collection_for_select(employees, "id", "full_name", current_employee[:id]), id: 'employee_switch'
+                #{company.display_name}
         %ul.nav.grid_5.push_1
           %li= link_to 'Roster', roster_path
           %li= link_to 'Timesheet', '#'
@@ -36,7 +31,14 @@
               %li= link_to 'Projects', projects_path
               %li= link_to 'Employees', employees_path
               %li= link_to 'Teams', teams_path
-          %li= link_to 'Hernus Carelsen', '#'
+
+          - employees = current_company.employees
+          - if employees.length > 1
+            %li.employee_switch
+              = form_tag switch_employees_path, method: :get do |f|
+                = select_tag :id, options_from_collection_for_select(employees, "id", "full_name", current_employee[:id]), id: 'employee_switch'
+          - else
+            = link_to current_employee.full_name, '#' 
     :javascript
       $(function() {
         $('.nav').droppy({trigger: 'click', speed: 50});

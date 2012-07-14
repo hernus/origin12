@@ -17,4 +17,9 @@ class Company < ActiveRecord::Base
     self.class.where([ 'id = ? OR parent_id = ?', self[:id], self[:id] ])
   end
 
+  def managers
+    # TODO Define managers
+    employees
+  end
+
 end

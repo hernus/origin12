@@ -10,6 +10,10 @@ class CreateProjects < ActiveRecord::Migration
       t.string    :name
       t.string    :description
       t.string    :state
+      t.date      :start_date
+      t.date      :end_date
+      t.float     :budget_days
+      t.float     :budget_amount
       t.timestamps
       t.datetime  :deleted_at
     end

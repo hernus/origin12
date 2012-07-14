@@ -8,27 +8,30 @@
   .grid_8.push_2
     %table
       %tr
-        %th Customer
+        %th Customer        
         %th Project
-        %th Name
+        %th Name        
         %th Status
         %th Manager
+        %th Parent
         %th &nbsp;
       - projects.each do |project|
         - project_customer = project.customer
         - project_manager = project.manager
+        - project_parent = project.parent
         %tr
           %td= project_customer.display_name
           %td= project.short_name
           %td= project.name
           %td Active
           %td= project_manager ? project_manager.full_name : '&nbsp;'.html_safe
+          %td= project_parent ? project_parent.display_name : '&nbsp;'.html_safe
           %td
             .actions
               = # link_to 'Show', project
               = link_to 'Edit', edit_customer_project_path(project_customer, project)
               = # link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
       %tr
-        %td{ colspan: '6' }
+        %td{ colspan: '7' }
           .actions
             = link_to 'New Project', customer? ? new_customer_project_path(customer) : new_project_path

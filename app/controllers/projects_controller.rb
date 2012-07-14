@@ -5,7 +5,8 @@ class ProjectsController < ApplicationController
       :customer?,
       :customers,
       :projects,
-      :project
+      :project,
+      :managers
 
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to customers_path
@@ -105,6 +106,10 @@ private
 
   def new_project
     @project = projects.build(params[:project])
+  end
+
+  def managers
+    @managers ||= current_company.managers
   end
 
 end

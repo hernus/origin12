@@ -26,7 +26,7 @@
                 .customer
                   = roster_form.label :customer_id
                   - # TODO: Refactor into a form builder
-                  = roster_form.collection_select :customer_id, Customer.all, :id, :display_name, { include_blank: true }, { class: 'customer', data: { remote: true, type: :json, url: "#{projects_path}" }}
+                  = roster_form.collection_select :customer_id, current_company.customers, :id, :display_name, { include_blank: true }, { class: 'customer', data: { remote: true, type: :json, url: "#{projects_path}" }}
               %td
                 .hours
                   = roster_form.label :hours

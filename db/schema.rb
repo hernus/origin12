@@ -82,8 +82,12 @@ ActiveRecord::Schema.define(:version => 20120708061016) do
     t.string   "name"
     t.string   "description"
     t.string   "state"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.float    "budget_days"
+    t.float    "budget_amount"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.datetime "deleted_at"
   end
 

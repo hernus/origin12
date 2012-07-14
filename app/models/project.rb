@@ -3,8 +3,13 @@ class Project < ActiveRecord::Base
   attr_accessible \
       :description,
       :manager_id,
+      :parent_id,
       :name,
-      :short_name
+      :short_name,
+      :start_date,
+      :end_date,
+      :budget_days,
+      :budget_amount
 
   alias_attribute :display_name, :name
 
@@ -13,6 +18,8 @@ class Project < ActiveRecord::Base
 
   has_many :rosters
   has_many :schedule_rates
+
+  acts_as_tree order: 'name'
 
   after_create :initialize_key
 

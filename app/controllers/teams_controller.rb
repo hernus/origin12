@@ -2,7 +2,8 @@ class TeamsController < ApplicationController
 
   helper_method \
     :teams,
-    :team
+    :team,
+    :managers
 
   before_filter :new_team, only: [ :new, :create ]
   
@@ -71,6 +72,10 @@ private
 
   def new_team
     @team = current_company.teams.build(params[:team])
+  end
+
+  def managers
+    @managers ||= current_company.managers
   end
 
 end

@@ -14,21 +14,16 @@ body {
       overflow: hidden;
     }
 
-    ul.switches,
+    ul.switch,
     ul.nav {
       position: relative;
       list-style: none;
       top: 15px;
     }
 
-    ul.switches {
-      li {
-        float: left;
-      }
-    }
-
     .company_name {
       color: white;
+      margin-right: 0.5em
     }
 
     a,

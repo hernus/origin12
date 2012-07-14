@@ -21,8 +21,29 @@
     = f.label :description
     = f.text_field :description
   .field
+    = f.label :parent_id, 'Parent Project'
+    = f.select :parent_id, options_from_collection_for_select(projects, "id", "display_name")
+  .field
     = f.label :manager_id, 'Manager'
-    = f.collection_select :manager_id, managers, :id, :full_name
+    - if managers.length > 0
+      = f.collection_select :manager_id, managers, "id", "full_name"
+    - else
+      No managers in company
+  .field
+    = f.label :start_date, 'Start Date'
+    = f.date_select :start_date, order: [ :day, :month, :year ]
+  .field
+    = f.label :end_date, 'End Date'
+    = f.date_select :end_date, order: [ :day, :month, :year ]
+  .field
+    = f.label :budget_days, 'Budget Days'
+    = f.text_field :budget_days
+  .field
+    = f.label :budget_amount, 'Budget Amount'
+    = f.text_field :budget_amount
+  .field
+    = f.label :status, 'Status'
+    Active
   %hr
   .actions
     = f.submit 'Save'

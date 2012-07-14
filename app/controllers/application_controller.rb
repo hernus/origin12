@@ -43,6 +43,7 @@ protected
 
   def current_company=(company)
     session[:current_company_id] = company[:id]
+    self.current_employee = company.employees.first
     @current_company = company
   end
 
