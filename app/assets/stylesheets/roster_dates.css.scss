@@ -7,17 +7,13 @@
 	margin-top: 1em;
 	
 	.nav {
+		margin: 0.5em 0;
 		text-align: right;
+		a:first-child {
+			text-align: left;
+		}
 	}
 
-	.nav.calendar_from {
-		margin-bottom: 0.5em;
-	}
-
-	.nav.calendar_until {
-		margin-top: 0.5em;
-	}
-	
 	.calendar {
 		input[type='text'] {
 			padding: 4px;

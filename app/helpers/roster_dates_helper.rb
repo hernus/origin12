@@ -38,12 +38,32 @@ module RosterDatesHelper
     end
   end
 
+  def link_to_calendar_date(date, url)
+    label = date.day.to_s
+    label += " #{date.strftime('%b')}" if date === date.beginning_of_month
+    link_to label, url, class: 'roster_date_day_number'
+  end
+
   def calendar_from
-    params[:from] ? Date.parse(params[:from]) : (Date.today - 1.week)
+    set_session_calendar_date(:from, default: Date.today - 1.week)
   end
 
   def calendar_until
-    params[:until] ? Date.parse(params[:until]) : (calendar_from + 3.weeks)
+    set_session_calendar_date(:until, default: calendar_from + 3.weeks)
+  end
+
+private
+
+  def set_session_calendar_date(key, opts = {})
+    session_key  = "calendar_#{key.to_s}".to_sym
+    default_date = opts.delete(:default)
+    if params[key]
+      session[session_key] = Date.parse(params[key])
+    else
+      session[session_key] ||= default_date
+    end
+  rescue
+    session[session_key] = default_date
   end
 
 end
