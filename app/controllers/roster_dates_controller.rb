@@ -17,6 +17,14 @@ class RosterDatesController < ApplicationController
     end
   end
 
+  # def show
+  #   @roster_date = RosterDate.find(params[:id])
+  #   respond_to do |format|
+  #     format.html # show.html.erb
+  #     format.json { render json: @roster_date }
+  #   end
+  # end
+
   def new
     respond_to do |format|
       format.html 
@@ -61,6 +69,15 @@ class RosterDatesController < ApplicationController
       end
     end
   end
+
+  # def destroy
+  #   @roster_date = RosterDate.find(params[:id])
+  #   @roster_date.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to roster_dates_url }
+  #     format.json { head :no_content }
+  #   end
+  # end  
 
 private
 
@@ -108,22 +125,5 @@ private
       redirect_to roster_dates_path, notice: "Roster week was successfully #{params[:action]}d."
     end
   end
-
-  # def show
-  #   @roster_date = RosterDate.find(params[:id])
-  #   respond_to do |format|
-  #     format.html # show.html.erb
-  #     format.json { render json: @roster_date }
-  #   end
-  # end
-
-  # def destroy
-  #   @roster_date = RosterDate.find(params[:id])
-  #   @roster_date.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to roster_dates_url }
-  #     format.json { head :no_content }
-  #   end
-  # end
 
 end

@@ -6,10 +6,6 @@
 .roster_dates  {
 	margin-top: 1em;
 	
-	h1 {
-		text-align: center;
-	}
-
 	.nav {
 		text-align: right;
 	}
@@ -23,13 +19,24 @@
 	}
 	
 	.calendar {
+		input[type='text'] {
+			padding: 4px;
+			border: 1px solid #CCC;
+			width: 6em;
+		}
+
 		table {
 			border-collapse: collapse;
 			width: 100%;
-			th, td {
+			// margin: 0 auto;
 
+			th, td {
+				font-family: "Lucida Grande",arial,helvetica,sans-serif;
+				padding: 0.5em;
+				border: 1px solid #999;
 			}
 		}
+
 		a.roster_date_day_number,
 		a.roster_date_day_number:hover,
 		a.roster_date_day_number:visited {
@@ -37,12 +44,13 @@
 			color: #666;
 			background-color: inherit;
 		}
+
 		a.duplicate,
 		a.delete {
 			display: inline-block;
 			text-decoration: none;
 			float: right;
-			font-size: 0.5em;
+			font-size: 0.8em;
 			color: #999;
 			&:hover {
 				background-color: inherit;
@@ -52,18 +60,14 @@
 	}
 
 	&.duplicate {
-		.wday {
-			display: block;
-			label {
-				margin-left: 0.2em;
+		.calendar {
+			.copy {
+				font-size: 0.9em;
+				color: #333;
 			}
-		}
-		.weeks {
-			text-align: right;
-			input[type='text'] {
-				padding: 4px;
-				border: 1px solid #CCC;
-				width: 6em;
+			.actions {
+				margin: 1em 0;
+				text-align: right;
 			}
 		}
 	}	
@@ -213,14 +217,6 @@
 	}
 }
 
-.calendar td,
-.calendar th {
-	font-family: "Lucida Grande",arial,helvetica,sans-serif;
-	font-size: 10px;
-	padding: 6px;
-	border: 1px solid #999;
-}
-
 .calendar th {
 	background: #DDD;
 	color: #666;
@@ -233,7 +229,7 @@
 	color: #777;
 	height: 80px;
 	vertical-align: top;
-	font-size: 16px;
+	font-size: 1em;
 }
 
 .calendar .notmonth {
