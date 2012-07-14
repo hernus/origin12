@@ -18,6 +18,11 @@ class Employee < ActiveRecord::Base
   has_many :schedule_rates
   has_many :roster_dates
 
+  scope :company, lambda { |company|
+    joins(:company_employees).
+    where(company_employees: { id: company[:id] })
+  }
+  
   accepts_nested_attributes_for :employee_rates,
       reject_if: :all_blank,
       allow_destroy: true
@@ -31,11 +36,6 @@ class Employee < ActiveRecord::Base
 
   def destroy
     touch(:deleted_at)
-  end
-
-  def companies
-    # TODO: Employee should only see their company and its children
-    Company.order(:name)
   end
 
   def authorized?(klass, *operations)

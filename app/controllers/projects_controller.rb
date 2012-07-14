@@ -21,8 +21,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   # def show
   #   @project = Project.find(params[:id])
   #     format.html # show.html.erb
@@ -61,8 +59,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   # def destroy
   #   @project = Project.find(params[:id])
   #   @project.destroy

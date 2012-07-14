@@ -26,7 +26,7 @@ class RosterDatesController < ApplicationController
 
   def create
     respond_to do |format|
-      if roster_date.save
+      if current_company.roster_dates.push(roster_date)
         roster_date.duplicate(*params[:wday])
         format.html { redirect_to_rosters_dates_or_schedule_rates }
         format.json { render json: roster_date, status: :created, location: roster_date }
@@ -67,13 +67,14 @@ private
   ### Exposures
 
   def roster_dates
-    @roster_dates ||= current_employee.roster_dates
+    @roster_dates ||= current_employee.roster_dates.company(current_company)
   end
 
   def roster_date
     @roster_date ||= begin
       if params[:id]
-        current_company.employees.find(current_employee[:id]).roster_dates.find(params[:id])
+        # current_company.employees.find(current_employee[:id]).roster_dates.find(params[:id])
+        current_employee.roster_dates.company(current_company).find(params[:id])
       else
         new_roster_date
       end
@@ -86,7 +87,7 @@ private
   end
 
   def build_roster_date
-    @roster_date = roster_dates.build(params[:roster_date])  
+    @roster_date = roster_dates.build(params[:roster_date])
   end
 
   def build_default_roster_date

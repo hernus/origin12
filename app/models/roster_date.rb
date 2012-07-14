@@ -11,6 +11,11 @@ class RosterDate < ActiveRecord::Base
 
   validates_uniqueness_of :date, scope: :employee_id
 
+  belongs_to :employee
+  belongs_to :company
+
+  has_many :rosters, :dependent => :destroy
+
   scope :week, lambda { |date|
     where(date: date.beginning_of_week(:sunday)..(date.end_of_week(:saturday) + 1.day))
   }
@@ -19,15 +24,11 @@ class RosterDate < ActiveRecord::Base
     where([ '((weekday(`date`) + 1) % 7) in (?)', wdays])
   }
 
-  scope :employee, lambda { |employee_id|
-    where(employee_id: employee_id)
-  }
+  scope :employee, lambda { |employee| where(employee_id: employee[:id]) }
 
   scope :unlocked, where(locked: false)
 
-  belongs_to :employee
-
-  has_many :rosters, :dependent => :destroy
+  scope :company, lambda { |company| where(company_id: company[:id]) }
 
   accepts_nested_attributes_for :rosters,
       allow_destroy: true,

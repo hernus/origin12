@@ -9,6 +9,7 @@ class Company < ActiveRecord::Base
   has_many :customers
   has_many :projects
   has_many :teams
+  has_many :roster_dates
   
   has_many :company_employees
   has_many :employees, through: :company_employees

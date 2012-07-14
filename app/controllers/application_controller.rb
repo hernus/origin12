@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     @current_employee ||= begin
       if session[:current_employee_id].present?
         Employee.find(session[:current_employee_id])
+      else
+        employee = Employee.find_by_first_name('hernus')  
+        session[:current_employee_id] = employee[:id]
+        employee
       end
     end
       
@@ -27,7 +31,7 @@ class ApplicationController < ActionController::Base
       if session[:current_company_id].present?
         current_employee.companies.find(session[:current_company_id])
       else
-        company = current_employee.company
+        company = current_employee.companies.first
         session[:current_company_id] = company[:id]
         company
       end
