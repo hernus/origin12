@@ -39,7 +39,7 @@ class ProjectsController < ApplicationController
 
   def create
     respond_to do |format|
-      if project.save
+      if current_company.projects.push(project)
         format.html { redirect_to customer_projects_path(customer), notice: 'Project was successfully created.' }
         format.json { render json: project, status: :created, location: project }
       else

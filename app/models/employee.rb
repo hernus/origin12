@@ -10,7 +10,9 @@ class Employee < ActiveRecord::Base
     :schedule_rates_attributes
 
   belongs_to :user
-  belongs_to :company
+
+  has_many :company_employees
+  has_many :companies, through: :company_employees
 
   has_many :employee_rates
   has_many :schedule_rates

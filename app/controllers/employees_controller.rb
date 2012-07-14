@@ -40,7 +40,7 @@ class EmployeesController < ApplicationController
 
   def create
     respond_to do |format|
-      if employee.save
+      if current_company.employees.push(employee)
         format.html { redirect_to employees_path, notice: 'Employee was successfully created.' }
         format.json { render json: employee, status: :created, location: employee }
       else
@@ -81,7 +81,7 @@ private
   end
 
   def new_employee
-    @employee = employees.build(params[:employee])    
+    @employee = employees.build(params[:employee])
   end
 
   def build_employee_rates 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120708061016) do
+ActiveRecord::Schema.define(:version => 20120714100134) do
 
   create_table "activities", :force => true do |t|
     t.string   "key"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(:version => 20120708061016) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
+
+  create_table "company_employees", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "employee_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "company_employees", ["company_id", "employee_id"], :name => "index_company_employees_on_company_id_and_employee_id"
+  add_index "company_employees", ["employee_id"], :name => "index_company_employees_on_employee_id"
 
   create_table "customers", :force => true do |t|
     t.string   "key"
@@ -58,7 +68,6 @@ ActiveRecord::Schema.define(:version => 20120708061016) do
   create_table "employees", :force => true do |t|
     t.string   "key"
     t.integer  "user_id"
-    t.integer  "company_id"
     t.integer  "employment_type_id"
     t.integer  "role_id"
     t.string   "first_name"

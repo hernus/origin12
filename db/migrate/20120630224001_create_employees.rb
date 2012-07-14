@@ -3,7 +3,6 @@ class CreateEmployees < ActiveRecord::Migration
     create_table :employees do |t|
       t.string    :key
       t.integer   :user_id
-      t.integer   :company_id  
       t.integer   :employment_type_id
       t.integer   :role_id
       t.string    :first_name

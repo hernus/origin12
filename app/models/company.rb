@@ -8,8 +8,10 @@ class Company < ActiveRecord::Base
 
   has_many :customers
   has_many :projects
-  has_many :employees
   has_many :teams
+  
+  has_many :company_employees
+  has_many :employees, through: :company_employees
 
   alias_attribute :display_name, :name
 

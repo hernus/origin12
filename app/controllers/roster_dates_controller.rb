@@ -73,7 +73,7 @@ private
   def roster_date
     @roster_date ||= begin
       if params[:id]
-        current_employee.roster_dates.find(params[:id])
+        current_company.employees.find(current_employee[:id]).roster_dates.find(params[:id])
       else
         new_roster_date
       end

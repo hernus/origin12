@@ -17,12 +17,7 @@ class ApplicationController < ActionController::Base
     @current_employee ||= begin
       if session[:current_employee_id].present?
         Employee.find(session[:current_employee_id])
-      else
-        employee = Employee.find_by_first_name('hernus')  
-        session[:current_employee_id] = employee[:id]
-        employee
       end
-
     end
       
   end

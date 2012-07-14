@@ -73,7 +73,11 @@ private
   end
 
   def new_company
-    @company ||= Company.root.children.build(params[:company])
+    @company ||= begin
+      Company.root.children.build(params[:company]).tap do |company|
+        company.company_employees.build(employee_id: current_employee[:id])
+      end
+    end
   end
 
   def set_current_company
