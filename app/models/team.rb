@@ -9,6 +9,7 @@ class Team < ActiveRecord::Base
     :state
 
   alias_attribute :name, :description
+  alias_attribute :display_name, :description
 
   belongs_to :company
   belongs_to :manager, class_name: 'Employee'

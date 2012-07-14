@@ -23,9 +23,9 @@
               = schedule_rate.until.strftime '%A, %B %e %Y'
             - else
               Until end of project
-  %hr
-  .clearfix
-    .actions
-      = link_to 'Add Schedule', new_project_schedule_rate_path(project)
-      - if return_to_path
-        = link_to 'Back to Roster', return_to_path
+    %tr
+      %td{ colspan: '3' }
+        .actions
+          = link_to 'Add Schedule', new_project_schedule_rate_path(project)
+          - if return_to_path
+            = link_to 'Back to Roster', return_to_path

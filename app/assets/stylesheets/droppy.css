@@ -17,7 +17,9 @@
 /* Everything else is theming */
 
 .droppy { background-color: inherit; }
-.droppy *:hover { background-color: black; }
+.droppy ul:hover {
+  background-color: black; 
+}
 .droppy a { padding: 6px; line-height: 1; }
 /*.droppy li.hover a { background-color: #5E5A5A; }*/
 .droppy ul { top: 25px; }

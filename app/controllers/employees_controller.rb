@@ -84,7 +84,7 @@ private
     @employee = employees.build(params[:employee])    
   end
 
-  def build_employee_rates
+  def build_employee_rates 
     employee.employee_rates.build
   end
 

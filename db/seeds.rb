@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ActiveRecord::Base.transaction do
-  Company.create!(key: 'O12', name: 'Origin12', internal: false)
+  Company.create!(key: 'O12', name: 'Origin12')
 
   Activity.create!([
     { description: '100% Probability', display_order: 10 },

@@ -8,4 +8,8 @@ class EmployeeRate < ActiveRecord::Base
     :internal_rate,
     :until
 
+  def until_eternity?
+    self.until == RateDate::ETERNITY_DATE
+  end
+
 end

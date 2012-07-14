@@ -34,7 +34,6 @@
         = schedule_rate_form.text_field :contract_rate
       %td.until
         Until
-        = # schedule_rate_form.date_select :until, order: [ :day, :month, :year ]
         - if schedule_rate_form.object.until
           %span.until_date
             = schedule_rate_form.date_select :until, order: [ :day, :month, :year ]

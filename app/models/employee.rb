@@ -17,7 +17,6 @@ class Employee < ActiveRecord::Base
   has_many :roster_dates
 
   accepts_nested_attributes_for :employee_rates, reject_if: :all_blank
-
   accepts_nested_attributes_for :schedule_rates, reject_if: :all_blank
 
   def full_name

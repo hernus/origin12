@@ -10,7 +10,7 @@
   .header.clearfix
     .employee.grid_3.alpha
       = f.label :employee_id
-      = current_user.employee.full_name
+      = current_employee.full_name
     .locked.grid_3.omega
       = f.check_box :locked
       = f.label :locked, 'Copy protect'

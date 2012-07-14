@@ -75,6 +75,10 @@ hr {
 
     .actions {
       text-align: right;
+      a {
+        display: inline-block;
+        margin-left: 0.5em;
+      }
     }
   }
 }
