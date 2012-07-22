@@ -89,9 +89,9 @@ private
   def projects
     @projects ||= begin
       if customer?
-        customer.projects.order('`created_at` DESC')
+        customer.projects.order('created_at DESC')
       else
-        current_company.projects.includes(:customer).order('`created_at` DESC')
+        current_company.projects.includes(:customer).order('created_at DESC')
       end
     end
   end

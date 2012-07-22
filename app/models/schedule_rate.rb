@@ -1,5 +1,5 @@
 class ScheduleRate < ActiveRecord::Base
-  
+
   attr_writer :back_rate
 
   attr_accessible \
@@ -21,11 +21,11 @@ class ScheduleRate < ActiveRecord::Base
 
   scope :chronological, lambda {
     eternity = RosterDate::ETERNITY_DATE.to_s(:db)
-    order("coalesce(`until`, '#{eternity}') ASC")
+    order("coalesce(until, '#{eternity}') ASC")
   }
 
   scope :date, lambda { |date|
-    where([ "`until` >= ?", date ]).chronological.limit(1)
+    where([ "until >= ?", date ]).chronological.limit(1)
   }
 
 

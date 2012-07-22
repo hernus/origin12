@@ -31,7 +31,7 @@ class RosterDatesController < ApplicationController
 
   def new
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render json: roster_date }
     end
   end
@@ -66,7 +66,7 @@ class RosterDatesController < ApplicationController
     respond_to do |format|
       if RosterDate.duplicate current_employee, current_company, params[:duplicate]
         format.html { redirect_to roster_dates_path, notice: 'Roster week was successfully duplicated.' }
-        format.json { head :no_content }        
+        format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { head :status, :unprocessable_entity }
@@ -81,7 +81,7 @@ class RosterDatesController < ApplicationController
   #     format.html { redirect_to roster_dates_url }
   #     format.json { head :no_content }
   #   end
-  # end  
+  # end
 
 private
 

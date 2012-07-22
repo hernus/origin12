@@ -21,7 +21,8 @@ class RosterDate < ActiveRecord::Base
   }
 
   scope :wdays, lambda { |wdays|
-    where([ '((weekday(`date`) + 1) % 7) in (?)', wdays])
+    # mysql: where([ '((weekday(`date`) + 1) % 7) in (?)', wdays])
+    where([ 'EXTRACT(DOW FROM date)::NUMERIC IN (?)', wdays])
   }
 
   scope :employee, lambda { |employee| where(employee_id: employee[:id]) }

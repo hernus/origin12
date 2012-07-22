@@ -5,7 +5,8 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+# gem 'mysql2'
+gem 'pg'
 
 gem 'jquery-rails'
 gem 'haml', '~> 3.1'
@@ -25,6 +26,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'heroku', '2.16.0'
   gem 'rspec-rails', '~> 2.6'
   gem 'autotest'
   gem 'autotest-rails'
@@ -44,9 +46,11 @@ end
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+# gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
 
 gem 'acts_as_tree'
+gem 'taps'
+gem 'thin'
